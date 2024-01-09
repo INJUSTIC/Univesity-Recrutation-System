@@ -29,9 +29,9 @@ public class Kierunek {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column (name = "nazwa")
-    @NotBlank(message = "nazwa jest wymagana")
-    @Size(max = 100, message = "nazwa nie może przekraczać 100 znaków")
+    @Column (name = "Nazwa")
+    @NotBlank(message = "Nazwa jest wymagana")
+    @Size(max = 100, message = "Nazwa nie może przekraczać 100 znaków")
     private String nazwa;
 
     @Valid

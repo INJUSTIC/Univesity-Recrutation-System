@@ -19,13 +19,13 @@ public class Opiekun {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column (name = "imie")
-    @NotBlank(message = "imię jest wymagane")
-    @Size(max = 128, message = "imię nie może przekraczać 128 znaków")
+    @Column (name = "Imię")
+    @NotBlank(message = "Imię jest wymagane")
+    @Size(max = 128, message = "Imię nie może przekraczać 128 znaków")
     private String imie;
 
-    @Column (name = "nazwisko")
-    @NotBlank(message = "nazwisko jest wymagane")
-    @Size(max = 128, message = "nazwisko nie może przekraczać 128 znaków")
+    @Column (name = "Nazwisko")
+    @NotBlank(message = "Nazwisko jest wymagane")
+    @Size(max = 128, message = "Nazwisko nie może przekraczać 128 znaków")
     private String nazwisko;
 }

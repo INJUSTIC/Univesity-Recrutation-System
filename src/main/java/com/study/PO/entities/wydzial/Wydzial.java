@@ -23,12 +23,30 @@ public class Wydzial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column (name = "nazwa")
-    @NotBlank(message = "nazwa jest wymagana")
-    @Size(max = 100, message = "nazwa nie może przekraczać 100 znaków")
+    @Column (name = "Nazwa")
+    @NotBlank(message = "Nazwa jest wymagana")
+    @Size(max = 100, message = "Nazwa nie może przekraczać 100 znaków")
     private String nazwa;
+
+    @Column (name = "Skrót")
+    @NotBlank(message = "Skrót jest wymagany")
+    @Size(max = 10, message = "Skrót nie może przekraczać 100 znaków")
+    private String skrot;
 
     @OneToMany(mappedBy = "wydzial",
             cascade = CascadeType.ALL)
     private List<Kierunek> kierunki;
+
+    public Wydzial(String nazwa, String skrot) {
+        this.nazwa = nazwa;
+        this.skrot = skrot;
+    }
+
+    @Override
+    public String toString() {
+        return "Wydzial{" +
+                "nazwa='" + nazwa + '\'' +
+                ", skrot='" + skrot + '\'' +
+                '}';
+    }
 }
