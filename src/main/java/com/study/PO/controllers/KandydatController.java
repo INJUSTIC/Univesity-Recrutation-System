@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.PO.entities.kandydat.Kandydat;
-import com.study.services.KandydatService;
+import com.study.PO.services.KandydatService;
 
 
 @RestController

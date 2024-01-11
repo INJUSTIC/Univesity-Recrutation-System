@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.PO.entities.wniosek.Wniosek;
-import com.study.services.WniosekService;
+import com.study.PO.services.WniosekService;
 
 
 @RestController

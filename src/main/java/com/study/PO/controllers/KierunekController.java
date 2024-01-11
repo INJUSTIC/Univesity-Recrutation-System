@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.PO.entities.kierunek.Kierunek;
-import com.study.services.KierunekService;
+import com.study.PO.services.KierunekService;
 
 
 @RestController

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.PO.entities.wydzial.Wydzial;
-import com.study.services.WydzialService;
+import com.study.PO.services.WydzialService;
 
 
 
