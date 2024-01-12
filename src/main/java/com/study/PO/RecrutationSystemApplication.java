@@ -18,18 +18,18 @@ public class RecrutationSystemApplication {
 		SpringApplication.run(RecrutationSystemApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner init(WydzialRepository wydzialRepository) {
-		return args -> {
-			List<String> nazwyWydzialow = List.of("Wydział Architektury", "Wydział Budownictwa", "Wydział Informatyki i Telekomunikacji");
-			int i = 1;
-			for (String nazwa : nazwyWydzialow) {
-				Wydzial wydzial = new Wydzial(nazwa, "W" + i);
-				i++;
-				wydzialRepository.save(wydzial);
-			}
-			wydzialRepository.findAll().forEach(System.out::println);
-		};
-	}
+//	@Bean
+//	CommandLineRunner init(WydzialRepository wydzialRepository) {
+//		return args -> {
+//			List<String> nazwyWydzialow = List.of("Wydział Architektury", "Wydział Budownictwa", "Wydział Informatyki i Telekomunikacji");
+//			int i = 1;
+//			for (String nazwa : nazwyWydzialow) {
+//				Wydzial wydzial = new Wydzial(nazwa, "W" + i);
+//				i++;
+//				wydzialRepository.save(wydzial);
+//			}
+//			wydzialRepository.findAll().forEach(System.out::println);
+//		};
+//	}
 
 }

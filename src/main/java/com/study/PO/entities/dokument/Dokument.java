@@ -24,6 +24,8 @@ public class Dokument {
     @Min(value = 0, message = "przelicznik musi być nieujemny")
     private double przelicznik;
     private boolean czyZweryfikowany;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "typ_dokumentu")
     private TypDokumentu typDokumentu;
 
