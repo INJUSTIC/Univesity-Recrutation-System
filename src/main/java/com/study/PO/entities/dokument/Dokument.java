@@ -26,6 +26,8 @@ public class Dokument {
     private boolean czyZweryfikowany;
     @Column(name = "typ_dokumentu")
     private TypDokumentu typDokumentu;
+    @Column(name = "nazwa_dokumentu")
+    private String nazwaDokumentu;
 
     @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="wniosek_id")
