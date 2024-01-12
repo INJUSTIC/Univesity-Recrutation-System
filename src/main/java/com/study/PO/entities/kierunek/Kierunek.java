@@ -58,8 +58,8 @@ public class Kierunek {
     private int prognLiczbaMiejsc;
 
     @Column (name = "liczba_os_na_miejsce")
-    @Min(value = 0, message = "Liczba osób na miejsce musi być liczbą naturalną")
-    private int liczbaOsNaMiejsce;
+    @Min(value = 0, message = "Liczba osób na miejsce musi być liczbą dodatnia")
+    private double liczbaOsNaMiejsce;
 
     @Column(name = "cena_za_wniosek")
     @Min(value = 0, message = "Cena musi być liczbą nieujemną")
@@ -74,6 +74,7 @@ public class Kierunek {
     @Min(value = 0, message = "Liczba chętnych musi być liczbą naturalną")
     private int liczbaChetnych;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "stopien_studiow")
     @NotNull(message = "stopień studiów jest wymagany")
     private StopienStudiow stopienStudiow;
@@ -82,4 +83,18 @@ public class Kierunek {
     @JoinColumn(name = "wydzial_id")
     private Wydzial wydzial;
 
+//    public Kierunek(String nazwa, Opiekun opiekun, String planStudiow, List<Integer> przeszProgi, int progPunktowy, int prognLiczbaMiejsc, int liczbaOsNaMiejsce, double cenaZaWniosek, List<Integer> liczbaKandydWPoprzLat, int liczbaChetnych, StopienStudiow stopienStudiow, Wydzial wydzial) {
+//        this.nazwa = nazwa;
+//        this.opiekun = opiekun;
+//        this.planStudiow = planStudiow;
+//        this.przeszProgi = przeszProgi;
+//        this.progPunktowy = progPunktowy;
+//        this.prognLiczbaMiejsc = prognLiczbaMiejsc;
+//        this.liczbaOsNaMiejsce = liczbaOsNaMiejsce;
+//        this.cenaZaWniosek = cenaZaWniosek;
+//        this.liczbaKandydWPoprzLat = liczbaKandydWPoprzLat;
+//        this.liczbaChetnych = liczbaChetnych;
+//        this.stopienStudiow = stopienStudiow;
+//        this.wydzial = wydzial;
+//    }
 }

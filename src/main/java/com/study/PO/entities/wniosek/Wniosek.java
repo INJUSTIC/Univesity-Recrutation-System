@@ -26,6 +26,7 @@ public class Wniosek {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Enumerated(EnumType.STRING)
     @Column (name = "status_wniosku")
     @NotNull(message = "status wniosku jest wymagany")
     private StatusWniosku statusWniosku;
