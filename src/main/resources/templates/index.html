@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" th:include="layout :: layout">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home Page</title>
 </head>
 <body>
-<ul>
-    <li><a th:href="@{/kandydat}">Strona główna kandydatu</a></li>
-    <li><a th:href="@{/recruitmentDepartment/main}">Strona główna Działu rekrutacji</a></li>
-    <li><a th:href="@{/}">Strona główna Działu IT</a></li>
-</ul>
+    <div th:replace="fragments/top_bar/start_page :: top_bar_content"></div>
+    <div th:replace="fragments/main_content/index :: content"></div>
 </body>
 </html>
