@@ -1,5 +1,6 @@
 package com.study.PO.entities.wniosek;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.PO.entities.dokument.Dokument;
 import com.study.PO.entities.kandydat.Kandydat;
 import com.study.PO.entities.kierunek.Kierunek;

@@ -3,6 +3,7 @@
 
 package com.study.PO.entities.kierunek;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.PO.entities.kandydat.Kandydat;
 import com.study.PO.entities.wydzial.Wydzial;
 import jakarta.persistence.*;
@@ -79,6 +80,7 @@ public class Kierunek {
     @NotNull(message = "stopień studiów jest wymagany")
     private StopienStudiow stopienStudiow;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "wydzial_id")
     private Wydzial wydzial;

@@ -1,5 +1,6 @@
 package com.study.PO.entities.kandydat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.PO.entities.dokument.Dokument;
 import com.study.PO.entities.wniosek.Wniosek;
 import jakarta.persistence.*;
@@ -33,6 +34,7 @@ public class Kandydat {
     @Size(max = 128, message = "hasło nie może przekraczać 128 znaków")
     private String haslo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "kandydat",
             cascade = CascadeType.ALL)
     private List<Wniosek> wnioski;

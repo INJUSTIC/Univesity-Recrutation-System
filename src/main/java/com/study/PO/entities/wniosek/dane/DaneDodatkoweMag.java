@@ -1,17 +1,19 @@
 package com.study.PO.entities.wniosek.dane;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "dane_dodatkowe_mag")
 public class DaneDodatkoweMag extends DaneDodatkowe{
     @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -1,5 +1,6 @@
 package com.study.PO.entities.dokument;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.PO.entities.wniosek.Wniosek;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -31,6 +32,7 @@ public class Dokument {
     @Column(name = "nazwa_dokumentu")
     private String nazwaDokumentu;
 
+    @JsonIgnore
     @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="wniosek_id")
     private Wniosek wniosek;

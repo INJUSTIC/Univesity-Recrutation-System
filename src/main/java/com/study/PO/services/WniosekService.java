@@ -64,5 +64,9 @@ public class WniosekService {
         List<Wniosek> wnioski = getAllWniosek();
         return wnioski.stream().filter(Wniosek -> Wniosek.getKierunek().getWydzial().getNazwa().equals(wydzial)).toList();
     }
-    
+
+    public List<Wniosek> getWnioskiByCode(String code) {
+        List<Wniosek> wnioski = getAllWniosek();
+        return wnioski.stream().filter(Wniosek -> Wniosek.getKierunek().getWydzial().getSkrot().equals(code)).toList();
+    }
 }
