@@ -10,4 +10,10 @@ public class GoscViewController {
     public String getMainPage() {
         return "gosc/main";
     }
+
+    @GetMapping("/gosc/obliczwskaznik")
+    public String getObliczanieWskaznika() {
+        return "gosc/obliczanie_wskaznika";
+    }
+
 }

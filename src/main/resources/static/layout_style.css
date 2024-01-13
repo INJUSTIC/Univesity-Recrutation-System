@@ -3,7 +3,7 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .container {
@@ -12,7 +12,11 @@ html, body {
     height: 100%;
 }
 
-.header, .footer {
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: black;
     padding: 5px;
     display: flex;
@@ -20,6 +24,31 @@ html, body {
     align-items: center;
     height: 50px; /* Adjust the height as needed */
     z-index: 100;
+}
+
+.footer {
+    width: 100%;
+    background-color: black;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* Adjust the height as needed */
+    z-index: 100;
+}
+
+.bottom_section_fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* Adjust the height as needed */
+    z-index: 1;
 }
 
 .footer button {
@@ -135,13 +164,20 @@ html, body {
     height: 5vh;
 }
 
+.bottom_section{
+}
+
 .middle_section{
+    flex: 1;
+}
+
+.middle_section_cropped{
     height: 90vh;
     overflow: hidden;
 }
 
 .login_button{
-    padding: 10px 20px; /* Adjust padding as needed */
+    padding: 5px 10px; /* Adjust padding as needed */
     background-color: #803a92; /* Set the background color */
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-transform: uppercase;
@@ -152,5 +188,15 @@ html, body {
     text-decoration: none;
     border: none; /* Remove borders */
     border-radius: 12px; /* Set the border-radius for rounded corners */
+    margin-bottom: 0px;
+}
+
+.user_icon{
+    background-color: transparent;
+    width: 70px;
+    height: 70px;
+    border: none;
+    cursor: pointer;
+    margin: 0px;
 }
 

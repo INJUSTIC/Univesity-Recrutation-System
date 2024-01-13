@@ -1,0 +1,40 @@
+.content_gradient {
+    width: 100%;
+    min-height: 100vh; /* Ensure the background covers at least the site height */
+    background: linear-gradient(160deg, rgba(58, 4, 46, 0.9), rgba(34, 19, 96, 0.9) 40%, rgba(137, 52, 138, 0.9) 60%, rgba(38, 2, 36, 0.9));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow-y: auto;
+}
+
+.content_title {
+    margin-left: 10vw;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 2px;
+    font-size: 40px;
+    color: #fff;
+    padding-top: 20px;
+    padding-left: 0px;
+}
+
+.content_container {
+    flex: 1; /* Take up remaining vertical space */
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding: 10px; /* Adjusted padding for better spacing */
+    margin-bottom: 30px;
+}
+
+.content {
+    background-color: rgba(242, 240, 241, 0.4);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%; /* Ensure the content takes full width */
+    font-size: 20px;
+}
