@@ -123,37 +123,19 @@ public class DzialRekrutacjiController {
     }*/
 
     @GetMapping("/recrutationPerforming/applications")
-    public List<DaneIdentWniosek> getApplications() {
+    public List<DaneIdentWniosek> getApplications(@RequestParam(required = false) String kierunek, @RequestParam(required = false) StatusWniosku statusWniosku, @RequestParam(required = false) StopienStudiow stopienKierunku, @RequestParam(required = false) String wydzialNameOrCode) {
         List<Wniosek> wnioski = wniosekService.getAllWniosek();
-        List<DaneIdentWniosek> wnioskiDane = getDaneIdentWniosek(wnioski);
-        return wnioskiDane;
-    }
-    @GetMapping("/recrutationPerforming/applications/filterByKierunek")
-    public List<DaneIdentWniosek> filterByKierunek(@RequestParam String kierunek) {
-        List<Wniosek> wnioski = wniosekService.getWnioskiByKierunek(kierunek);
-        List<DaneIdentWniosek> wnioskiDane = getDaneIdentWniosek(wnioski);
-        return wnioskiDane;
-    }
-
-    @GetMapping("/recrutationPerforming/applications/filterByStatus")
-    public List<DaneIdentWniosek> filterByStatus(@RequestParam StatusWniosku statusWniosku) {
-        List<Wniosek> wnioski = wniosekService.getWnioskiByStatus(statusWniosku);
-        List<DaneIdentWniosek> wnioskiDane = getDaneIdentWniosek(wnioski);
-        return wnioskiDane;
-    }
-
-    @GetMapping("/recrutationPerforming/applications/filterByStopien")
-    public List<DaneIdentWniosek> filterByStopien(@RequestParam StopienStudiow stopienKierunku) {
-        List<Wniosek> wnioski = wniosekService.getWnioskiByStopienKierunku(stopienKierunku);
-        List<DaneIdentWniosek> wnioskiDane = getDaneIdentWniosek(wnioski);
-        return wnioskiDane;
-    }
-
-    @GetMapping("/recrutationPerforming/applications/filterByWydzial")
-    public List<DaneIdentWniosek> filterByWydzial(@RequestParam String wydzialNameOrCode) {
-        List<Wniosek> wnioski = wniosekService.getWnioskiByWydzial(wydzialNameOrCode);
-        if (wnioski.size() == 0) {
-            wnioski = wniosekService.getWnioskiByCode(wydzialNameOrCode);
+        if (kierunek != null) {
+            wnioski = wnioski.stream().filter(Wniosek -> Wniosek.getKierunek().getNazwa().equals(kierunek)).toList();
+        }
+        if (statusWniosku != null) {
+            wnioski = wnioski.stream().filter(Wniosek -> Wniosek.getStatusWniosku() == statusWniosku).toList();
+        }
+        if (stopienKierunku != null) {
+            wnioski = wnioski.stream().filter(Wniosek -> Wniosek.getKierunek().getStopienStudiow() == stopienKierunku).toList();
+        }
+        if (wydzialNameOrCode != null) {
+            wnioski = wnioski.stream().filter(Wniosek -> Wniosek.getKierunek().getWydzial().getNazwa().equals(wydzialNameOrCode)).toList();
         }
         List<DaneIdentWniosek> wnioskiDane = getDaneIdentWniosek(wnioski);
         return wnioskiDane;

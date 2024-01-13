@@ -44,29 +44,4 @@ public class WniosekService {
     public void removeWniosekID(Long id){
         repositoryWniosek.deleteById(id);
     }
-
-    public List<Wniosek> getWnioskiByKierunek(String nazwaKierunku) {
-        List<Wniosek> wnioski = getAllWniosek();
-        return wnioski.stream().filter(Wniosek -> Wniosek.getKierunek().getNazwa().equals(nazwaKierunku)).toList();
-    }
-
-    public List<Wniosek> getWnioskiByStatus(StatusWniosku status) {
-        List<Wniosek> wnioski = getAllWniosek();
-        return wnioski.stream().filter(Wniosek -> Wniosek.getStatusWniosku() == status).toList();
-    }
-
-    public List<Wniosek> getWnioskiByStopienKierunku(StopienStudiow stopien) {
-        List<Wniosek> wnioski = getAllWniosek();
-        return wnioski.stream().filter(Wniosek -> Wniosek.getKierunek().getStopienStudiow() == stopien).toList();
-    }
-
-    public List<Wniosek> getWnioskiByWydzial(String wydzial) {
-        List<Wniosek> wnioski = getAllWniosek();
-        return wnioski.stream().filter(Wniosek -> Wniosek.getKierunek().getWydzial().getNazwa().equals(wydzial)).toList();
-    }
-
-    public List<Wniosek> getWnioskiByCode(String code) {
-        List<Wniosek> wnioski = getAllWniosek();
-        return wnioski.stream().filter(Wniosek -> Wniosek.getKierunek().getWydzial().getSkrot().equals(code)).toList();
-    }
 }
