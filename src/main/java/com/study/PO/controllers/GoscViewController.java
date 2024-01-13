@@ -2,12 +2,12 @@ package com.study.PO.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-public class StartController {
-
-    @GetMapping("/")
+public class GoscViewController {
+    @GetMapping("/gosc/")
     public String getMainPage() {
-        return "index";
+        return "gosc/main";
     }
 }

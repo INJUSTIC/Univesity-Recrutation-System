@@ -113,9 +113,10 @@ html, body {
     letter-spacing: 2px;
     color: #fff;
     cursor: pointer;
+    text-decoration: none;
 }
 
-.navbar ul li::after{
+.navbar ul li a::after{
     content: '';
     height: 3px;
     width: 0;
@@ -126,6 +127,30 @@ html, body {
     transition: 0.5s;
 }
 
-.navbar ul li:hover::after{
+.navbar ul li a:hover::after{
     width: 100%;
 }
+
+.top_section .bottom_section{
+    height: 5vh;
+}
+
+.middle_section{
+    height: 90vh;
+    overflow: hidden;
+}
+
+.login_button{
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #803a92; /* Set the background color */
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    border: none; /* Remove borders */
+    border-radius: 12px; /* Set the border-radius for rounded corners */
+}
+

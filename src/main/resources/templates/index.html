@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layout.html}">
+      layout:decorate="~{layout}">
 <head>
     <title>Home Page</title>
 </head>
 <body>
-    <div th:replace="~{fragments/top_bar/start_page :: top_nav_bar}"></div>
-    <div th:replace="~{fragments/main_content/start_page :: main_content}"></div>
+    <div layout:fragment="top_nav_bar" class="top_section">
+        <div layout:insert="~{fragments/top_bar/start_page}"></div>
+    </div>
 
-    <div class="footer">
-        <button class="clickable"><i class="fab fa-facebook-f" style="color: #ffffff;"></i></button>
-        <button class="clickable"><i class="fab fa-instagram" style="color: #ffffff;"></i></button>
-        <button class="clickable"><i class="fab fa-linkedin-in" style="color: #ffffff;"></i></button>
-        <button class="clickable"><i class="fab fa-youtube" style="color: #ffffff;"></i></button>
+    <div layout:fragment="main_content" class="middle_section">
+        <div layout:insert="~{fragments/main_content/start_page}"></div>
+    </div>
+
+    <div layout:fragment="bottom_bar" class="bottom_section">
+        <div layout:insert="~{fragments/bottom_bar/bottom_bar}"></div>
     </div>
 </body>
 </html>
