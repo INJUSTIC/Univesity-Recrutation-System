@@ -1,12 +1,17 @@
 package com.study.PO.controllers;
 
 import com.study.PO.entities.dokument.Dokument;
+import com.study.PO.entities.kierunek.Kierunek;
 import com.study.PO.entities.kierunek.StopienStudiow;
 import com.study.PO.entities.wniosek.DaneIdentWniosek;
 import com.study.PO.entities.wniosek.StatusWniosku;
 import com.study.PO.entities.wniosek.Wniosek;
+import com.study.PO.entities.wydzial.Wydzial;
 import com.study.PO.services.DokumentService;
+import com.study.PO.services.KierunekService;
 import com.study.PO.services.WniosekService;
+import com.study.PO.services.WydzialService;
+import jakarta.validation.Valid;
 import org.attoparser.dom.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -18,6 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -30,14 +36,19 @@ import java.util.List;
 public class DzialRekrutacjiController {
     private final WniosekService wniosekService;
     private final DokumentService dokumentService;
+    private final KierunekService kierunekService;
+
+    private final WydzialService wydzialService;
 
     private final ResourceLoader resourceLoader;
 
     @Autowired
-    public DzialRekrutacjiController(WniosekService wniosekService, DokumentService dokumentService, ResourceLoader resourceLoader) {
+    public DzialRekrutacjiController(WniosekService wniosekService, DokumentService dokumentService, KierunekService kierunekService, WydzialService wydzialService, ResourceLoader resourceLoader) {
         this.wniosekService = wniosekService;
         this.dokumentService = dokumentService;
         this.resourceLoader = resourceLoader;
+        this.kierunekService = kierunekService;
+        this.wydzialService = wydzialService;
     }
 
     @GetMapping("/main")
@@ -176,6 +187,40 @@ public class DzialRekrutacjiController {
                 .ok()
                 .headers(headers)
                 .body(new InputStreamResource(documentStream));
+    }
+
+    @GetMapping("facultyManagement")
+    public String getAllFaculties(Model model) {
+        List<Wydzial> wydzialy = wydzialService.getAllWydzial();
+        model.addAttribute("wydzialy", wydzialy);
+        return "recruitmentDepartment/wydzialy/showAll";
+    }
+
+    @GetMapping("facultyManagement/{facultyId}")
+    public String getFaculty(Model model, @PathVariable long facultyId) {
+        Wydzial wydzial = wydzialService.getWydzial(facultyId);
+        model.addAttribute("wydzial", wydzial);
+        return "recruitmentDepartment/wydzialy/showWydzial";
+    }
+
+    @GetMapping("facultyManagement/{facultyId}/addSpecialization")
+    public String showAddSpecializationForm(Model model, @PathVariable long facultyId) {
+        Kierunek kierunek = new Kierunek();
+        model.addAttribute("kierunek", kierunek);
+        model.addAttribute("wydzialId", facultyId);
+        return "recruitmentDepartment/kierunki/addKierunekForm";
+    }
+
+    @PostMapping("facultyManagement/{facultyId}/addSpecialization")
+    public String addKierunek(Model model, @Valid @ModelAttribute("kierunek") Kierunek kierunek, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("kierunek", kierunek);
+            return "recruitmentDepartment/kierunki/addKierunekForm";
+        }
+        else {
+            kierunekService.addKierunek(kierunek);
+        }
+        return "redirect:/facultyManagement";
     }
 
    private List<DaneIdentWniosek> getDaneIdentWniosek(List<Wniosek> wnioski) {
