@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/layout_style.css">
+    <link rel="stylesheet" href="/layout_style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 </head>
 <body>
 <div class="container">
     <div class="navbar">
-        <div th:fragment="top_bar_content"></div>
+        <div th:fragment="top_nav_bar"></div>
     </div>
     <div class="main-content">
-        <div th:fragment="content"></div>
+        <div th:fragment="main_content"></div>
     </div>
 
-    <div class="footer">
-        <button class="clickable"><i class="fab fa-facebook-f" style="color: #ffffff;"></i></button>
-        <button class="clickable"><i class="fab fa-instagram" style="color: #ffffff;"></i></button>
-        <button class="clickable"><i class="fab fa-linkedin-in" style="color: #ffffff;"></i></button>
-        <button class="clickable"><i class="fab fa-youtube" style="color: #ffffff;"></i></button>
-    </div>
+<!--    <div class="footer">-->
+<!--        <button class="clickable"><i class="fab fa-facebook-f" style="color: #ffffff;"></i></button>-->
+<!--        <button class="clickable"><i class="fab fa-instagram" style="color: #ffffff;"></i></button>-->
+<!--        <button class="clickable"><i class="fab fa-linkedin-in" style="color: #ffffff;"></i></button>-->
+<!--        <button class="clickable"><i class="fab fa-youtube" style="color: #ffffff;"></i></button>-->
+<!--    </div>-->
 </div>
 </body>
 </html>
