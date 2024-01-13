@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-@RequestMapping("/recruitmentDepartment")
+@RequestMapping("/dzialrekrutacji")
 public class DzialRekrutacjiController {
    @GetMapping("/main")
-    public String getMainPage() {
-       return "recruitmentDepartment/main";
+   public String getMainPage() {
+       return "dzialrekrutacji/main";
    }
 }
