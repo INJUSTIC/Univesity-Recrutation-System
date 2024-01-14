@@ -6,6 +6,7 @@ html, body {
     overflow-x: hidden;
 }
 
+
 .container {
     display: flex;
     flex-direction: column;
@@ -157,6 +158,38 @@ html, body {
 }
 
 .navbar ul li a:hover::after{
+    width: 100%;
+}
+
+
+.main-content-links ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+.main-content-links ul li a{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.main-content-links ul li a::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #E65728;
+    position: absolute;
+    left: 0;
+    bottom: 23px;
+    transition: 0.5s;
+}
+
+a:hover::after{
     width: 100%;
 }
 

@@ -53,7 +53,13 @@ INSERT INTO dane_dodatkowe (id) VALUES
 (3),
 (4),
 (5),
-(6);
+(6),
+(7),
+(8),
+(9),
+(10),
+(11),
+(12);
 -- Insert data into DaneDodatkoweDok
 INSERT INTO dane_dodatkowe_doktor (id, data_uk_stud_II_stop, kierunek_ukoncz_stud_II_stop, uczelnia_ukoncz_stud_II_stop)
 VALUES (1,'2022-01-01', 'Computer Science', 'University A');
@@ -75,9 +81,76 @@ VALUES (5,'2020-01-01', 'Computer Engineering', 'University C');
 INSERT INTO dane_dodatkowe_mag (id, data_uk_stud_I_stop, kierunek_ukoncz_stud_I_stop, uczelnia_ukoncz_stud_I_stop)
 VALUES (6,'2020-01-01', 'Computer Engineering', 'University C');
 
+INSERT INTO dane_dodatkowe_doktor (id, data_uk_stud_II_stop, kierunek_ukoncz_stud_II_stop, uczelnia_ukoncz_stud_II_stop)
+VALUES (7,'2022-01-01', 'Computer Science', 'University A');
+
+-- Insert data into DaneDodatkoweInz
+INSERT INTO dane_dodatkowe_inz (id, data_uk_szk_sr, nr_swiad_dojrz, data_wyst_swiad_dojrz, uczelnia_ukoncz_szk_sr)
+VALUES (8,'2021-01-01', '12345', '2021-02-01', 'High School B');
+
+-- Insert data into DaneDodatkoweMag
+INSERT INTO dane_dodatkowe_mag (id, data_uk_stud_I_stop, kierunek_ukoncz_stud_I_stop, uczelnia_ukoncz_stud_I_stop)
+VALUES (9,'2020-01-01', 'Computer Engineering', 'University C');
+
+INSERT INTO dane_dodatkowe_mag (id, data_uk_stud_I_stop, kierunek_ukoncz_stud_I_stop, uczelnia_ukoncz_stud_I_stop)
+VALUES (10,'2020-01-01', 'Computer Engineering', 'University C');
+
+INSERT INTO dane_dodatkowe_mag (id, data_uk_stud_I_stop, kierunek_ukoncz_stud_I_stop, uczelnia_ukoncz_stud_I_stop)
+VALUES (11,'2020-01-01', 'Computer Engineering', 'University C');
+
+INSERT INTO dane_dodatkowe_mag (id, data_uk_stud_I_stop, kierunek_ukoncz_stud_I_stop, uczelnia_ukoncz_stud_I_stop)
+VALUES (12,'2020-01-01', 'Computer Engineering', 'University C');
 
 
 -- Insert data into DanePersonalne
+INSERT INTO dane_personalne (imie, nazwisko, kraj_ur, email, data_ur, miejsc_ur, imie_matki, imie_ojca,
+                             kraj_zam, miejsc_zam, ulica, numer_domu, numer_mieszk, kod_pocztowy, powiat, wojewodz, numer_tel,
+                             obywatelstwo, pesel, numer_paszp)
+VALUES ('John', 'Doe', 0, 'john.doe@example.com', '1990-01-01', 'Warsaw', 'Mary', 'John Sr.',
+        0, 'Warsaw', 'Main St', '123', '45', '00-001', 'Mazowieckie', 'Mazowieckie', '123456789',
+        'Polish', '12345678901', 'AB123456');
+
+
+-- Insert data into dane_personalne
+INSERT INTO dane_personalne (imie, nazwisko, kraj_ur, email, data_ur, miejsc_ur, imie_matki, imie_ojca,
+                             kraj_zam, miejsc_zam, ulica, numer_domu, numer_mieszk, kod_pocztowy, powiat, wojewodz, numer_tel,
+                             obywatelstwo, pesel, numer_paszp)
+VALUES ('Vlad', 'Portnov', 1, 'john.doe@example.com', '1990-01-01', 'Warsaw', 'Mary', 'John Sr.',
+        0, 'Warsaw', 'Main St', '123', '45', '00-001', 'Mazowieckie', 'Mazowieckie', '123456789',
+        'Polish', '12345678901', 'AB123456');
+
+-- Insert data into dane_personalne
+INSERT INTO dane_personalne (imie, nazwisko, kraj_ur, email, data_ur, miejsc_ur, imie_matki, imie_ojca,
+                             kraj_zam, miejsc_zam, ulica, numer_domu, numer_mieszk, kod_pocztowy, powiat, wojewodz, numer_tel,
+                             obywatelstwo, pesel, numer_paszp)
+VALUES ('Name', 'Surname', 2, 'john.doe@example.com', '1990-01-01', 'Warsaw', 'Mary', 'John Sr.',
+        0, 'Warsaw', 'Main St', '123', '45', '00-001', 'Mazowieckie', 'Mazowieckie', '123456789',
+        'Polish', '12345678901', 'AB123456');
+
+INSERT INTO dane_personalne (imie, nazwisko, kraj_ur, email, data_ur, miejsc_ur, imie_matki, imie_ojca,
+                             kraj_zam, miejsc_zam, ulica, numer_domu, numer_mieszk, kod_pocztowy, powiat, wojewodz, numer_tel,
+                             obywatelstwo, pesel, numer_paszp)
+VALUES ('John', 'Doe', 0, 'john.doe@example.com', '1990-01-01', 'Warsaw', 'Mary', 'John Sr.',
+        0, 'Warsaw', 'Main St', '123', '45', '00-001', 'Mazowieckie', 'Mazowieckie', '123456789',
+        'Polish', '12345678901', 'AB123456');
+
+
+-- Insert data into dane_personalne
+INSERT INTO dane_personalne (imie, nazwisko, kraj_ur, email, data_ur, miejsc_ur, imie_matki, imie_ojca,
+                             kraj_zam, miejsc_zam, ulica, numer_domu, numer_mieszk, kod_pocztowy, powiat, wojewodz, numer_tel,
+                             obywatelstwo, pesel, numer_paszp)
+VALUES ('Vlad', 'Portnov', 1, 'john.doe@example.com', '1990-01-01', 'Warsaw', 'Mary', 'John Sr.',
+        0, 'Warsaw', 'Main St', '123', '45', '00-001', 'Mazowieckie', 'Mazowieckie', '123456789',
+        'Polish', '12345678901', 'AB123456');
+
+-- Insert data into dane_personalne
+INSERT INTO dane_personalne (imie, nazwisko, kraj_ur, email, data_ur, miejsc_ur, imie_matki, imie_ojca,
+                             kraj_zam, miejsc_zam, ulica, numer_domu, numer_mieszk, kod_pocztowy, powiat, wojewodz, numer_tel,
+                             obywatelstwo, pesel, numer_paszp)
+VALUES ('Name', 'Surname', 2, 'john.doe@example.com', '1990-01-01', 'Warsaw', 'Mary', 'John Sr.',
+        0, 'Warsaw', 'Main St', '123', '45', '00-001', 'Mazowieckie', 'Mazowieckie', '123456789',
+        'Polish', '12345678901', 'AB123456');
+
 INSERT INTO dane_personalne (imie, nazwisko, kraj_ur, email, data_ur, miejsc_ur, imie_matki, imie_ojca,
                              kraj_zam, miejsc_zam, ulica, numer_domu, numer_mieszk, kod_pocztowy, powiat, wojewodz, numer_tel,
                              obywatelstwo, pesel, numer_paszp)
@@ -145,6 +218,24 @@ VALUES ('Przyjety', 5, 5, 3, 3);
 
 INSERT INTO wnioski (status_wniosku, id_dane_personalne, id_dane_dodatkowe, kierunek_id, kandydat_id)
 VALUES ('Przyjety', 6, 6, 2, 3);
+
+INSERT INTO wnioski (status_wniosku, id_dane_personalne, id_dane_dodatkowe, kierunek_id, kandydat_id)
+VALUES ('Przyjety', 7, 7, 1, 1);
+
+INSERT INTO wnioski (status_wniosku, id_dane_personalne, id_dane_dodatkowe, kierunek_id, kandydat_id)
+VALUES ('OczekNaDecyzje', 8, 8, 2, 2);
+
+INSERT INTO wnioski (status_wniosku, id_dane_personalne, id_dane_dodatkowe, kierunek_id, kandydat_id)
+VALUES ('Niekompletny', 9, 9, 3, 3);
+
+INSERT INTO wnioski (status_wniosku, id_dane_personalne, id_dane_dodatkowe, kierunek_id, kandydat_id)
+VALUES ('Niekompletny', 10, 10, 3, 3);
+
+INSERT INTO wnioski (status_wniosku, id_dane_personalne, id_dane_dodatkowe, kierunek_id, kandydat_id)
+VALUES ('Przyjety', 11, 11, 3, 3);
+
+INSERT INTO wnioski (status_wniosku, id_dane_personalne, id_dane_dodatkowe, kierunek_id, kandydat_id)
+VALUES ('Przyjety', 12, 12, 2, 3);
 
 
 -- Insert data into dokumenty

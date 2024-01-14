@@ -7,6 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class DaneIdentWniosek {
+    private long id;
     private StatusWniosku statusWniosku;
     private String imie;
     private String nazwisko;

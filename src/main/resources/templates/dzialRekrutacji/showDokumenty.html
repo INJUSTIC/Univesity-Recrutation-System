@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <title>Dokumenty</title>
+</head>
+<body>
+<div layout:fragment="top_nav_bar" class="top_section">
+    <div layout:insert="~{fragments/top_bar/przeprowadzenieRekrutacji}"></div>
+</div>
+
+<div layout:fragment="main_content" class="middle_section_cropped">
+    <div layout:insert="~{fragments/main_content/showDokumenty}"></div>
+</div>
+
+<div layout:fragment="bottom_bar" class="bottom_section_fixed">
+    <div layout:insert="~{fragments/bottom_bar/bottom_bar}"></div>
+</div>
+</body>
+</html>

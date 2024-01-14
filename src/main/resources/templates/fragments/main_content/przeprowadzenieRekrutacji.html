@@ -1,0 +1,42 @@
+<style>
+  .content {
+    text-align: center; /* Wyśrodkuj tekst w kontenerze */
+  }
+
+  .content a {
+    display: inline-block; /* or display: block; */
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .content a:after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #E65728;
+    position: relative;
+    left: 0;
+    top: 100%;
+    transition: width 0.5s;
+  }
+
+  .content a:hover:after {
+    width: 100%;
+  }
+
+</style>
+
+<div class="content_gradient">
+  <div class="content_title">
+    <p>Przeprowadzenie rekrutacji</p>
+  </div>
+  <div class="content_container">
+    <div class="content main-content-links">
+      <ul>
+        <li> <a th:href="@{/dzialRekrutacji/przeprowadzenieRekrutacji/wnioski}">Przeglądanie wniosków</a> <br> </li>
+        <li><a>Weryfikacja wniosków</a> <br></li>
+        <li><a>Edycja statusu wniosków</a> <br></li>
+      </ul>
+    </div>
+  </div>
+</div>

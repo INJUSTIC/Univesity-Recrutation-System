@@ -1,0 +1,98 @@
+<style>
+  .table-container {
+    max-height: 400px; /* Adjust the maximum height as needed */
+    overflow-y: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: rgba(242, 240, 241, 0.4);
+  }
+
+  .back-button {
+    margin-top: 20px;
+    width: auto;
+    display: block;
+  }
+
+  /* Add a specific class to target the back button */
+  .back-button-specific {
+    display: inline-block;
+    /* Add any additional styles you need */
+  }
+
+
+  .table-action a {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative; /* Add position: relative; to allow absolute positioning of :after */
+  }
+
+  .table-action a:after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #E65728;
+    position: absolute;
+    left: 0;
+    bottom: -4px; /* Adjusted to be at the bottom of the anchor */
+    transition: width 0.5s; /* Adjusted to only transition the width property */
+  }
+
+  .table-action a:hover:after {
+    width: 100%;
+  }
+</style>
+
+<div class="content_gradient">
+  <div class="table-container">
+    <table>
+      <thead>
+      <tr>
+        <th>Stopień</th>
+        <th>Kierunek</th>
+        <th>Kandydat</th>
+        <th>Status</th>
+        <th>Akcja</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Example Thymeleaf loop for dynamic content -->
+      <tr th:each="row : ${wnioskiDane}">
+        <td th:text="${row.stopienStudiow}"></td>
+        <td th:text="${row.nazwaKierunku}"></td>
+        <td th:text="${row.imie + ' ' + row.nazwisko}"></td>
+        <td th:text="${row.statusWniosku}"></td>
+        <td>
+            <span class="table-action">
+              <a th:href="@{/dzialRekrutacji/przeprowadzenieRekrutacji/wnioski/{wniosekId}(wniosekId=${row.id})}" th:text="Zobacz"></a>
+            </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button class="back-button back-button-specific" th:text="Wstecz" onclick="goBack()">Wstecz</button>
+
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</div>

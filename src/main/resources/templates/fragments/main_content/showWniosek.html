@@ -1,0 +1,105 @@
+<style>
+  .content_container_1 {
+    flex: 1; /* Take up remaining vertical space */
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding: 10px; /* Adjusted padding for better spacing */
+    margin-bottom: 30px;
+    overflow-y: auto;
+  }
+  .info-container {
+    margin-bottom: 15px; /* Add margin between each piece of information */
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
+
+  .column {
+    flex-basis: 48%; /* Установите нужную ширину колонки */
+    margin-bottom: 10px;
+  }
+
+  .btn-container-back {
+    position: absolute;
+    bottom: 80px;
+    left: 80px;
+    padding: 10px;
+  }
+
+  .btn-container-documents {
+    position: absolute;
+    bottom: 80px;
+    right: 80px;
+    padding: 10px;
+  }
+</style>
+
+<div class="content_gradient">
+  <div class="content_container_1" th:object="${wniosek}">
+    <div class="column">
+      <ul>
+        <li class="info-container" th:text="'Imię: ' + ${wniosek.danePersonalne.imie}"></li>
+        <li class="info-container" th:text="'Nazwisko: ' + ${wniosek.danePersonalne.nazwisko}"></li>
+        <li class="info-container" th:text="'Kraj urodzenia: ' + ${wniosek.danePersonalne.krajUr}"></li>
+        <li class="info-container" th:text="'Email: ' + ${wniosek.danePersonalne.email}"></li>
+        <li class="info-container" th:text="'Data urodzenia: ' + ${#dates.format(wniosek.danePersonalne.dataUr, 'dd-MM-yyyy')}"></li>
+        <li class="info-container" th:text="'Miejsce urodzenia: ' + ${wniosek.danePersonalne.miejscUr}"></li>
+        <li class="info-container" th:text="'Imię matki: ' + ${wniosek.danePersonalne.imieMatki}"></li>
+        <li class="info-container" th:text="'Imię ojca: ' + ${wniosek.danePersonalne.imieOjca}"></li>
+        <li class="info-container" th:text="'Kraj zamieszkania: ' + ${wniosek.danePersonalne.krajZam}"></li>
+        <li class="info-container" th:text="'Miejsce zamieszkania: ' + ${wniosek.danePersonalne.miejscZam}"></li>
+        <li class="info-container" th:text="'Ulica: ' + ${wniosek.danePersonalne.ulica}"></li>
+        <li class="info-container" th:text="'Numer domu: ' + ${wniosek.danePersonalne.numerDomu}"></li>
+      </ul>
+    </div>
+    <div class="column">
+      <ul>
+        <li class="info-container" th:if="${wniosek.danePersonalne.numerMieszk != null}" th:text="'Numer mieszkania: ' + ${wniosek.danePersonalne.numerMieszk}"></li>
+        <li class="info-container" th:text="'Kod pocztowy: ' + ${wniosek.danePersonalne.kodPocztowy}"></li>
+        <li class="info-container" th:if="${wniosek.danePersonalne.powiat != null}" th:text="'Powiat: ' + ${wniosek.danePersonalne.powiat}"></li>
+        <li class="info-container" th:if="${wniosek.danePersonalne.wojewodz != null}" th:text="'Województwo: ' + ${wniosek.danePersonalne.wojewodz}"></li>
+        <li class="info-container" th:text="'Numer telefonu: ' + ${wniosek.danePersonalne.numerTel}"></li><li class="info-container" th:text="'Obywatelstwo: ' + ${wniosek.danePersonalne.obywatelstwo}"></li>
+        <li class="info-container" th:if="${wniosek.danePersonalne.pesel != null}" th:text="'PESEL: ' + ${wniosek.danePersonalne.pesel}"></li>
+      </ul>
+
+      <ul th:if="${isInz}">
+        <li class="info-container" th:text="'Data ukończenia szkoły średniej: ' + ${wniosek.daneDodatkowe.DataUkSzkSr}"></li>
+        <li class="info-container" th:text="'Nr świadectwa dojrzałości: ' + ${wniosek.daneDodatkowe.NrSwiadDojrz}"></li>
+        <li class="info-container" th:text="'Data wystawienia świadectwa dojrzałości: ' + ${#dates.format(wniosek.daneDodatkowe.DataWystSwiadDojrz, 'dd-MM-yyyy')}"></li>
+        <li class="info-container" th:text="'Uczelnia ukończenia szkoły średniej: ' + ${wniosek.daneDodatkowe.UczelniaUkonczSzkSr}"></li>
+      </ul>
+
+      <ul th:if="${isMag}">
+        <li class="info-container" th:text="'Data ukończenia studiów I stopnia: ' + ${#dates.format(wniosek.daneDodatkowe.dataUkStud_I_Stop, 'dd-MM-yyyy')}"></li>
+        <li class="info-container" th:text="'Kierunek ukończonych studiów I stopnia: ' + ${wniosek.daneDodatkowe.KierunekUkonczStud_I_Stop}"></li>
+        <li class="info-container" th:text="'Uczelnia ukończonych studiów I stopnia: ' + ${wniosek.daneDodatkowe.UczelniaUkonczStud_I_Stop}"></li>
+      </ul>
+
+      <ul th:if="${isDok}">
+        <li class="info-container" th:text="'Data ukończenia studiów II stopnia: ' + ${#dates.format(wniosek.daneDodatkowe.dataUkStud_II_Stop, 'dd-MM-yyyy')}"></li>
+        <li class="info-container" th:text="'Kierunek ukończonych studiów II stopnia: ' + ${wniosek.daneDodatkowe.KierunekUkonczStud_II_Stop}"></li>
+        <li class="info-container" th:text="'Uczelnia ukończonych studiów II stopnia: ' + ${wniosek.daneDodatkowe.UczelniaUkonczStud_II_Stop}"></li>
+      </ul>
+    </div>
+  </div>
+  <div class="btn-container-back">
+    <button th:text="Wstecz" onclick="goBack()">Wstecz</button>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </div>
+
+  <div class="btn-container-documents" th:object="${wniosek}">
+    <a th:href="@{/dzialRekrutacji/przeprowadzenieRekrutacji/wnioski/{wniosekId}/dokumenty(wniosekId=${wniosek.id})}">Lista dokumentów</a>
+  </div>
+</div>
