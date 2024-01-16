@@ -2,6 +2,7 @@ package com.study.PO.services;
 
 import java.util.List;
 
+import com.study.PO.entities.kierunek.wskaznik.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,22 @@ public class KierunekService {
 
     public void removeKierunekID(Long id){
         repositoryKierunek.deleteById(id);
+    }
+
+    public PrzelicznikKryterium getPrzelicznikOfKryterium(Long id, Rodzaje_kryteriow rodzaj_kryterium){
+        Kierunek kierunek = repositoryKierunek.findById(id).orElse(null);
+
+        if (kierunek != null) {
+            List<KryteriumWstepne> kryteriaWstepneList = kierunek.getKryteria();
+
+            for (KryteriumWstepne kryteriumWstepne : kryteriaWstepneList) {
+                Kryterium kryterium = kryteriumWstepne.getKryterium();
+
+                if (kryterium.getNazwa() == rodzaj_kryterium.name())
+                    return PrzelicznikFactory.getPrzelicznik(kryterium);
+            }
+        }
+        return null;
     }
     
 }
