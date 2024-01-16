@@ -2,6 +2,7 @@ package com.study.PO.services;
 
 import java.util.List;
 
+import com.study.PO.entities.kierunek.StopienStudiow;
 import com.study.PO.entities.kierunek.wskaznik.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,12 @@ public class KierunekService {
             }
         }
         return null;
+    }
+
+    public List<String> getRodzajeKryteriowStopienStudiow(StopienStudiow stopienStudiow){
+        List<String> rodzajeKryteriow = repositoryKierunek.findDistinctRodzajeKryteriowByStopienStudiow(stopienStudiow.name());
+
+        return rodzajeKryteriow;
     }
     
 }

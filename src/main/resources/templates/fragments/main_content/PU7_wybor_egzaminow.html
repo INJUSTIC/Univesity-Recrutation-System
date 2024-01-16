@@ -1,0 +1,26 @@
+<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="content_title">
+        <p>Oblicz swój wskaźnik rekrutacyjny!</p>
+    </div>
+    <div class="content_container">
+        <div class="content">
+            <form action="/gosc/obliczwskaznik/egzaminy" method="post" th:object="${viewModel}">
+                <label for="wybraneEgzaminyPodstawa">Egzaminy maturalne - poziom podstawowy</label>
+                <select id="wybraneEgzaminyPodstawa" name="wybraneEgzaminyPodstawa" multiple="multiple">
+                    <option th:each="item : ${nazwyEgzaminow}" th:value="${item}" th:text="${item}"></option>
+                </select>
+                <label for="wybraneEgzaminyRozszerzenie">Egzaminy maturalne - poziom rozszerzony</label>
+                <select id="wybraneEgzaminyRozszerzenie" name="wybraneEgzaminyRozszerzenie" multiple="multiple">
+                    <option th:each="item : ${nazwyEgzaminow}" th:value="${item}" th:text="${item}"></option>
+                </select>
+                Egzamin z rysunku
+                <input type="checkbox" name="myCheckbox" th:field="*{egzaminRysunek}"/>
+                Studium Talent - Matematyka
+                <input type="checkbox" name="myCheckbox" th:field="*{studiumTalentMatematyka}"/>
+                Studium Talent - Fizyka
+                <input type="checkbox" name="myCheckbox" th:field="*{studiumTalentFizyka}"/>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
