@@ -129,11 +129,17 @@
     </div>
     <div class="filter-input-container">
       <label class="filter-label">Status</label>
-      <input id="status" class="filter-input" type="text" oninput="capitalizeFirstLetter(this)">
+      <select id="status" class="filter-input">
+        <option value="">-- Wybierz Status --</option>
+        <option th:each="status : ${T(com.study.PO.entities.wniosek.StatusWniosku).values()}" th:value="${status}" th:text="${status}"></option>
+      </select>
     </div>
     <div class="filter-input-container">
       <label class="filter-label">Stopień</label>
-      <input id="stopien" class="filter-input" type="text" oninput="capitalizeFirstLetter(this)">
+      <select id="stopien" class="filter-input">
+        <option value="">-- Wybierz Stopień --</option>
+        <option th:each="stopien : ${T(com.study.PO.entities.kierunek.StopienStudiow).values()}" th:value="${stopien}" th:text="${stopien}"></option>
+      </select>
     </div>
     <div class="filter-input-container">
       <label class="filter-label">Wydział</label>
