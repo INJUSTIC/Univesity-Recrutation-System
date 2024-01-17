@@ -2,18 +2,18 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}">
 <head>
-    <title>Dział IT</title>
+    <title>Wybierz wydzial</title>
 </head>
 <body>
 <div layout:fragment="top_nav_bar" class="top_section">
-    <div layout:insert="~{fragments/top_bar/dzialIT}"></div>
+    <div layout:insert="~{fragments/top_bar/gosc}"></div>
 </div>
 
-<div layout:fragment="main_content" class="middle_section_cropped">
-    <div layout:insert="~{DzialIT/start_page}"></div>
+<div layout:fragment="main_content" class="middle_section">
+    <div layout:insert="~{gosc/PU2_lista_wydzialow}"></div>
 </div>
 
-<div layout:fragment="bottom_bar" class="bottom_section_fixed">
+<div layout:fragment="bottom_bar" class="bottom_section">
     <div layout:insert="~{fragments/bottom_bar/bottom_bar}"></div>
 </div>
 </body>

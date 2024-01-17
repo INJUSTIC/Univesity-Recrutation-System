@@ -2,7 +2,17 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}">
 <head>
+    <style>
+        .middle_section_cropped {
+            /* Adjust these properties as needed */
+            max-height: 600px; /* Example height, adjust as needed */
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+        
+        </style>
     <title>Dział IT</title>
+
+    
 </head>
 <body>
 <div layout:fragment="top_nav_bar" class="top_section">
@@ -10,7 +20,7 @@
 </div>
 
 <div layout:fragment="main_content" class="middle_section_cropped">
-    <div layout:insert="~{DzialIT/start_page}"></div>
+    <div layout:insert="~{DzialIT/PU1_listakierunkow}"></div>
 </div>
 
 <div layout:fragment="bottom_bar" class="bottom_section_fixed">
