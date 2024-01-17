@@ -1,0 +1,16 @@
+<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="content_title">
+        <p>Oblicz swój wskaźnik rekrutacyjny!</p>
+    </div>
+    <div class="content_container">
+        <div class="content">
+            <form action="/gosc/obliczwskaznik/kryteria" method="post">
+                <label for="kryterium">Rodzaj studiów:</label>
+                <select id="kryterium" name="kryterium">
+                    <option th:each="rodzajKryterium : ${rodzajeKryteriow}" th:value="${rodzajKryterium}" th:text="${rodzajKryterium}"></option>
+                </select>
+                <button type="submit">Dalej</button>
+            </form>
+        </div>
+    </div>
+</div>

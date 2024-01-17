@@ -1,0 +1,18 @@
+<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="content_title">
+        <p>Oblicz swój wskaźnik rekrutacyjny!</p>
+    </div>
+    <div class="content_container">
+        <div class="content">
+            <form action="/gosc/obliczwskaznik" method="post">
+                <label for="stopienStudiow">Rodzaj studiów:</label>
+                <select id="stopienStudiow" name="stopienStudiow">
+                    <option value=1>Inżynierskie</option>
+                    <option value=2>Magisterskie</option>
+                </select>
+
+                <button type="submit" th:onclick="@{/gosc/wybierzkryterium}">Dalej</button>
+            </form>
+        </div>
+    </div>
+</div>
