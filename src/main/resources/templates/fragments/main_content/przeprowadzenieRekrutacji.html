@@ -24,13 +24,23 @@
     width: 100%;
   }
 
+  .content_container_1 {
+    flex: 1; /* Take up remaining vertical space */
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 150px;
+  }
+
 </style>
 
 <div class="content_gradient">
   <div class="content_title">
     <p>Przeprowadzenie rekrutacji</p>
   </div>
-  <div class="content_container">
+  <div class="content_container_1">
     <div class="content main-content-links">
       <ul>
         <li> <a th:href="@{/dzialRekrutacji/przeprowadzenieRekrutacji/wnioski}">Przeglądanie wniosków</a> <br> </li>
