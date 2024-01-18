@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.study.PO.entities.kierunek.StopienStudiow;
 import com.study.PO.entities.kierunek.wskaznik.*;
+import com.study.PO.repositories.KryteriumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class KierunekService {
 
     @Autowired
     private KierunekRepository repositoryKierunek;
+
+    @Autowired
+    private KryteriumRepository repositoryKryterium;
 
     public List<Kierunek> getAllKierunek() {
         return repositoryKierunek.findAll();
@@ -78,9 +82,8 @@ public class KierunekService {
 //                boolean czyInformatyka = zapytanie.getCzyInformatyka() != null ? zapytanie.getCzyInformatyka() : false;
 //                MaturalnyPrzedmiotDodatkowy mpd = new MaturalnyPrzedmiotDodatkowy(czyFizyka, czyBiologia, czyChemia, czyGeografia, czyInformatyka);
 //                return mpd;
-                MaturalnyPrzedmiotDodatkowy mpd = new MaturalnyPrzedmiotDodatkowy(true,false,false,false,true);
-                mpd.setNazwa("MATURA_POLSKA");
-                return mpd;
+                Long mpdId = repositoryKierunek.findMPDbyNazwaKierunku(nazwaKierunku);
+                return repositoryKryterium.findById(mpdId).isEmpty() ? null : (MaturalnyPrzedmiotDodatkowy) repositoryKryterium.findById(mpdId).get();
             }
         }
         return null;

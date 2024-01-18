@@ -10,21 +10,15 @@ import com.study.PO.services.WydzialService;
 import com.study.PO.viewModels.PU7wyborEgzaminowMaturalnychViewModel;
 import com.study.PO.viewModels.PU7wynikiInzynierskieViewModel;
 import com.study.PO.viewModels.PU7wynikiMagisterskieViewModel;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -71,7 +65,7 @@ public class GoscViewController {
 
 
     @PostMapping("/gosc/obliczwskaznik/kryteria")
-    public String getPU7Kryteria(@RequestParam String kryterium, Model model) {
+    public String getPU7Kryteria(@RequestParam String kryterium, Model model, HttpSession session) {
         List<String> nazwyEgzaminow = new ArrayList<>();
         if (kryterium.equals("matura polska")) {
             for (MaturalnePrzedmiotyObowiazkowe przedmiot : MaturalnePrzedmiotyObowiazkowe.values()){
@@ -81,56 +75,92 @@ public class GoscViewController {
                 nazwyEgzaminow.add(przedmiot.name().toLowerCase().replace("_", " ").replace("jezyk", "język"));
             }
             model.addAttribute("nazwyEgzaminow", nazwyEgzaminow);
+            session.setAttribute("kryterium", Rodzaje_kryteriow.MATURA_POLSKA);
         } else {
             if (kryterium.equals(Rodzaje_kryteriow.MATURA_IB.name())) {
                 nazwyEgzaminow.add("Jakis tam egzamin IB");
                 model.addAttribute("viewModel", new PU7wyborEgzaminowMaturalnychViewModel());
+                session.setAttribute("kryterium", Rodzaje_kryteriow.MATURA_IB);
             } else {
                 nazwyEgzaminow.add("Jakis tam egzamin Matury zagranicznej");
                 model.addAttribute("viewModel", new PU7wyborEgzaminowMaturalnychViewModel());
             }
         }
         PU7wynikiInzynierskieViewModel vm =  new PU7wynikiInzynierskieViewModel();
-        vm.setKryterium(Rodzaje_kryteriow.MATURA_POLSKA);
+//        vm.setKryterium(Rodzaje_kryteriow.MATURA_POLSKA);
         model.addAttribute("viewModel", vm);
+        session.setAttribute("viewModel", vm);
         return "gosc/PU7_wybor_egzaminow";
     }
 
-//    @PostMapping("/gosc/obliczwskaznik/egzaminy")
-//    public String getPU7Egzaminy(@ModelAttribute("viewModel") PU7wyborEgzaminowMaturalnychViewModel viewModel, Model model) {
-//        Set<String> nazwyEgzaminow = new HashSet<>(viewModel.getWybraneEgzaminyPodstawa());
-//        for (String nazwaEgz : viewModel.getWybraneEgzaminyRozszerzenie()) {
-//            nazwyEgzaminow.add(nazwaEgz);
-//        }
-//        model.addAttribute("nazwyEgzaminow", nazwyEgzaminow);
-//        return "gosc/PU7_wprowadzenie_wynikow";
-//    }
-
     @PostMapping("/gosc/obliczwskaznik/I/wyniki")
-    public String getPU7Wyniki(@ModelAttribute("viewModel") PU7wynikiInzynierskieViewModel viewModel, Model model) {
-        viewModel.initWyniki();
+    public String getPU7Wyniki(@ModelAttribute("viewModel") PU7wynikiInzynierskieViewModel viewModel, @SessionAttribute("viewModel") PU7wynikiInzynierskieViewModel sessionViewModel, Model model, HttpSession session) {
+        if (sessionViewModel.getWynikiPodstawa() == null || sessionViewModel.getWynikiRozszerzenie() == null) {
+            sessionViewModel.setNazwyEgzaminowPodstawa(viewModel.getNazwyEgzaminowPodstawa());
+            sessionViewModel.setNazwyEgzaminowRozszerzenie(viewModel.getNazwyEgzaminowRozszerzenie());
+            sessionViewModel.initWyniki();
+        }
+        viewModel.setWynikiPodstawa(sessionViewModel.getWynikiPodstawa());
+        viewModel.setWynikiRozszerzenie(sessionViewModel.getWynikiRozszerzenie());
+        viewModel.setNazwyEgzaminow(sessionViewModel.getNazwyEgzaminow());
+        viewModel.setCzyEgzaminDodatkowy(sessionViewModel.isCzyEgzaminDodatkowy());
+
         List<Kierunek> kierunki = kierunekService.getAllKierunek();
         List<String> nazwyKierunkow = kierunki.stream()
                 .map(k -> k.getNazwa())
                 .collect(Collectors.toList());
         model.addAttribute("nazwyKierunkow", nazwyKierunkow);
-//        model.addAttribute("viewModel", viewModel);
+        session.setAttribute("nazwyKierunkow", nazwyKierunkow);
+        model.addAttribute("viewModel", viewModel);
+//        if (sessionViewModel == null)
+//            session.setAttribute("viewModel", viewModel);
         return "gosc/PU7_wyniki_I_stopien";
     }
 
     @PostMapping("/gosc/obliczwskaznik/I/wskaznik")
-    public String getPU7Wskaznik(@ModelAttribute("viewModel") PU7wynikiInzynierskieViewModel viewModel, @RequestParam String nazwaKierunku, Model model) {
-        Kryterium kryterium = kierunekService.getKryteriumOnNazwaKierunkuRodzajKryterium(nazwaKierunku, Rodzaje_kryteriow.MATURA_POLSKA);
+    public String getPU7Wskaznik(@ModelAttribute("viewModel") PU7wynikiInzynierskieViewModel pageViewModel, @SessionAttribute("viewModel") PU7wynikiInzynierskieViewModel viewModel, @SessionAttribute("kryterium") Rodzaje_kryteriow kryterium, @SessionAttribute("nazwyKierunkow") List<String> nazwyKierunkow, @RequestParam String nazwaKierunku, Model model) {
+        Kryterium krytObj = kierunekService.getKryteriumOnNazwaKierunkuRodzajKryterium(nazwaKierunku, kryterium);
         if (kryterium != null) {
-            PrzelicznikKryterium przelicznik = PrzelicznikFactory.getPrzelicznik(kryterium);
+            PrzelicznikKryterium przelicznik = PrzelicznikFactory.getPrzelicznik(krytObj);
             if (przelicznik != null) {
-                double wynik = przelicznik.przeliczKryterium(new Wyniki(viewModel.getWynikiPodstawa(), viewModel.getWynikiRozszerzenie()));
+                viewModel.setWynikiPodstawa(pageViewModel.getWynikiPodstawa());
+                viewModel.setWynikiRozszerzenie(pageViewModel.getWynikiRozszerzenie());
+                Map<String, Double> wyniki1 = viewModel.getWynikiPodstawa();
+                Map<String, Double> wyniki2 = viewModel.getWynikiRozszerzenie();
+                double wynik = przelicznik.przeliczKryterium(new Wyniki(wyniki1, wyniki2));
                 model.addAttribute("wskaznik", wynik);
             }
         }
-//        model.addAttribute("viewModel", viewModel);
+        model.addAttribute("viewModel", viewModel);
+        model.addAttribute("nazwyKierunkow", nazwyKierunkow);
         return "gosc/PU7_wyniki_I_stopien";
     }
+
+//    @PostMapping("/gosc/obliczwskaznik/I/wyniki")
+//    public String getPU7Wyniki(@ModelAttribute("viewModel") PU7wynikiInzynierskieViewModel viewModel, Model model) {
+//        viewModel.initWyniki();
+//        List<Kierunek> kierunki = kierunekService.getAllKierunek();
+//        List<String> nazwyKierunkow = kierunki.stream()
+//                .map(k -> k.getNazwa())
+//                .collect(Collectors.toList());
+//        model.addAttribute("nazwyKierunkow", nazwyKierunkow);
+//        model.addAttribute("viewModel", viewModel);
+//        return "gosc/PU7_wyniki_I_stopien";
+//    }
+//
+//    @PostMapping("/gosc/obliczwskaznik/I/wskaznik")
+//    public String getPU7Wskaznik(@ModelAttribute("viewModel") PU7wynikiInzynierskieViewModel viewModel, @RequestParam String nazwaKierunku, Model model) {
+//        Kryterium kryterium = kierunekService.getKryteriumOnNazwaKierunkuRodzajKryterium(nazwaKierunku, Rodzaje_kryteriow.MATURA_POLSKA);
+//        if (kryterium != null) {
+//            PrzelicznikKryterium przelicznik = PrzelicznikFactory.getPrzelicznik(kryterium);
+//            if (przelicznik != null) {
+//                double wynik = przelicznik.przeliczKryterium(new Wyniki(viewModel.getWynikiPodstawa(), viewModel.getWynikiRozszerzenie()));
+//                model.addAttribute("wskaznik", wynik);
+//            }
+//        }
+//        model.addAttribute("viewModel", viewModel);
+//        return "gosc/PU7_wyniki_I_stopien";
+//    }
 
     @PostMapping("/gosc/obliczwskaznik/II/wyniki")
     public String getPU7WynikiMagisterskie(@ModelAttribute("viewModel") PU7wynikiMagisterskieViewModel viewModel, Model model) {

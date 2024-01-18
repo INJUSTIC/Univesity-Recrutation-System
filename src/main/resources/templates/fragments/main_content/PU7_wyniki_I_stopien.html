@@ -1,4 +1,4 @@
-<div class="content_title">
+<div class="content_title" xmlns:th="http://www.w3.org/1999/xhtml">
     <p>Oblicz swój wskaźnik rekrutacyjny!</p>
 </div>
 <div class="centered-content" xmlns:th="http://www.w3.org/1999/xhtml">
@@ -101,6 +101,10 @@
                             <span>
                                 <h3 th:text="${wskaznik} != null ? ${wskaznik} : ''"></h3>
                             </span>
+<!--                            <p>Wskaźnik rekrutacyjny: </p>-->
+<!--                            <span>-->
+<!--                                <h3 id="wskaznikValue"></h3>-->
+<!--                            </span>-->
                             <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
                                 <button id="back" type="button" class="btn btn-dark" onclick="goBack()">Wstecz</button>
                             </div>
