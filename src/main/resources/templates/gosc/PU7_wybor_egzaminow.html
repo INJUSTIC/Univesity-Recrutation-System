@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layout}">
-<head>
-    <title>Wybierz kryterium rekrutacji</title>
-</head>
-<body>
-<div layout:fragment="top_nav_bar" class="top_section">
-    <div layout:insert="~{fragments/top_bar/gosc}"></div>
-</div>
+      layout:decorate="~{layout_boot}">
+    <head>
+        <title>Gość</title>
+    </head>
+    <body>
+        <div layout:fragment="top_nav_bar">
+            <div layout:insert="~{fragments/top_bar/gosc_boot}"></div>
+        </div>
 
-<div layout:fragment="main_content" class="middle_section">
-    <div layout:insert="~{fragments/main_content/PU7_wybor_egzaminow}"></div>
-</div>
+        <div layout:fragment="main_content" class="middle_section">
+            <div layout:insert="~{fragments/main_content/PU7_wybor_egzaminow}"></div>
+        </div>
 
-<div layout:fragment="bottom_bar" class="bottom_section">
-    <div layout:insert="~{fragments/bottom_bar/bottom_bar}"></div>
-</div>
-</body>
+        <div layout:fragment="bottom_bar">
+            <div layout:insert="~{fragments/bottom_bar/bottom_bar_boot}"></div>
+        </div>
+    </body>
 </html>

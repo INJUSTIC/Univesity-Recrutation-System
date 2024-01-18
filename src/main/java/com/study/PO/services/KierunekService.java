@@ -66,5 +66,24 @@ public class KierunekService {
 
         return rodzajeKryteriow;
     }
+
+    public Kryterium getKryteriumOnNazwaKierunkuRodzajKryterium(String nazwaKierunku, Rodzaje_kryteriow rodzajKryt){
+        switch (rodzajKryt) {
+            case MATURA_POLSKA -> {
+//                KierunekRepository.MPDvalues zapytanie = repositoryKierunek.findMPDbyNazwaKierunku(nazwaKierunku);
+//                boolean czyFizyka = zapytanie.getCzyFizyka() != null ? zapytanie.getCzyFizyka() : false;
+//                boolean czyBiologia = zapytanie.getCzyBiologia() != null ? zapytanie.getCzyBiologia() : false;
+//                boolean czyChemia = zapytanie.getCzyChemia() != null ? zapytanie.getCzyChemia() : false;
+//                boolean czyGeografia = zapytanie.getCzyGeografia() != null ? zapytanie.getCzyGeografia() : false;
+//                boolean czyInformatyka = zapytanie.getCzyInformatyka() != null ? zapytanie.getCzyInformatyka() : false;
+//                MaturalnyPrzedmiotDodatkowy mpd = new MaturalnyPrzedmiotDodatkowy(czyFizyka, czyBiologia, czyChemia, czyGeografia, czyInformatyka);
+//                return mpd;
+                MaturalnyPrzedmiotDodatkowy mpd = new MaturalnyPrzedmiotDodatkowy(true,false,false,false,true);
+                mpd.setNazwa("MATURA_POLSKA");
+                return mpd;
+            }
+        }
+        return null;
+    }
     
 }

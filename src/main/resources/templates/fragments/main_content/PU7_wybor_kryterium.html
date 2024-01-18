@@ -1,16 +1,54 @@
-<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="content_title">
-        <p>Oblicz swój wskaźnik rekrutacyjny!</p>
-    </div>
-    <div class="content_container">
-        <div class="content">
-            <form action="/gosc/obliczwskaznik/kryteria" method="post">
-                <label for="kryterium">Rodzaj studiów:</label>
-                <select id="kryterium" name="kryterium">
-                    <option th:each="rodzajKryterium : ${rodzajeKryteriow}" th:value="${rodzajKryterium}" th:text="${rodzajKryterium}"></option>
-                </select>
-                <button type="submit">Dalej</button>
-            </form>
+<!--<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--    <div class="content_title">-->
+<!--        <p>Oblicz swój wskaźnik rekrutacyjny!</p>-->
+<!--    </div>-->
+<!--    <div class="content_container">-->
+<!--        <div class="content">-->
+<!--            <form action="/gosc/obliczwskaznik/kryteria" method="post">-->
+<!--                <label for="kryterium">Rodzaj studiów:</label>-->
+<!--                <select id="kryterium" name="kryterium">-->
+<!--                    <option th:each="rodzajKryterium : ${rodzajeKryteriow}" th:value="${rodzajKryterium}" th:text="${rodzajKryterium}"></option>-->
+<!--                </select>-->
+<!--                <button type="submit">Dalej</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="content_title">
+    <p>Oblicz swój wskaźnik rekrutacyjny!</p>
+</div>
+<div class="centered-content" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="form-body centered-content">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Wybierz kryterium</h3>
+                        <form action="/gosc/obliczwskaznik/kryteria" method="post" class="requires-validation" novalidate>
+
+                            <div class="col-md-12">
+                                <select id="kryterium" name="kryterium" class="form-select mt-3" required>
+                                    <option th:each="rodzajKryterium : ${rodzajeKryteriow}" th:value="${rodzajKryterium}" th:text="${rodzajKryterium}"></option>
+                                </select>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Proszę wybrać rodzaj kryterium!</div>
+                            </div>
+
+                            <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
+                                <button id="back" type="button" class="btn btn-dark" onclick="goBack()">Wstecz</button>
+                                <button id="submit" type="submit" class="btn btn-info">Dalej</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
