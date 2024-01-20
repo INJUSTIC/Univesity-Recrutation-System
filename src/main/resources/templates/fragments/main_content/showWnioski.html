@@ -13,6 +13,7 @@
   th, td {
     padding: 10px;
     text-align: left;
+    color: white;
   }
 
   .btn-container-back {
@@ -20,6 +21,18 @@
     bottom: 80px;
     left: 30px;
     padding: 10px;
+  }
+
+  button {
+    background-color: #8A5FA5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block; /* Full width for mobile, adjust as needed */
+    width: auto; /* Adjust based on your layout requirements */
   }
 
 
@@ -67,20 +80,13 @@
     border: none;
   }
 
-  .filter-button {
-    padding: 8px;
-    background-color: #E65728;
-    color: #fff;
-    cursor: pointer;
-    border: none;
-  }
-
   .filter-input-container {
     margin-right: 20px;
   }
 
   .filter-label {
     margin-bottom: 5px;
+    color: white;
   }
 
 </style>
@@ -146,7 +152,7 @@
       <input id="wydzial" class="filter-input" type="text" oninput="capitalizeFirstLetter(this)">
     </div>
 
-    <button class="filter-button" onclick="filterWnioski()">Filtruj</button>
+    <button onclick="filterWnioski()">Filtruj</button>
   </div>
 
   <div class="table-container">

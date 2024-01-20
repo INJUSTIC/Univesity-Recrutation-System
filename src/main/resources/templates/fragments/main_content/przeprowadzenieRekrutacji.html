@@ -24,6 +24,25 @@
     width: 100%;
   }
 
+  .btn-container-back {
+    position: absolute;
+    bottom: 80px;
+    left: 80px;
+    padding: 10px;
+  }
+
+  button {
+    background-color: #8A5FA5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block; /* Full width for mobile, adjust as needed */
+    width: auto; /* Adjust based on your layout requirements */
+  }
+
   .content_container_1 {
     flex: 1; /* Take up remaining vertical space */
     width: 80vw;
@@ -48,5 +67,14 @@
         <li><a>Edycja statusu wniosków</a> <br></li>
       </ul>
     </div>
+  </div>
+
+  <div class="btn-container-back">
+    <button th:text="Wstecz" onclick="goBack()">Wstecz</button>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
   </div>
 </div>

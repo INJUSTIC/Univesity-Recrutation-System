@@ -32,11 +32,11 @@ public class Kierunek {
 
     @Column (name = "Nazwa")
     @NotBlank(message = "Nazwa jest wymagana")
-    @Size(max = 100, message = "Nazwa nie może przekraczać 100 znaków")
+    @Size(max = 128, message = "Nazwa nie może przekraczać 128 znaków")
     private String nazwa;
 
     @Valid
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "opiekun_id")
     private Opiekun opiekun;
 

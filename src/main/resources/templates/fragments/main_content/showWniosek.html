@@ -9,6 +9,7 @@
     padding: 10px; /* Adjusted padding for better spacing */
     margin-bottom: 30px;
     overflow-y: auto;
+    color: white;
   }
   .info-container {
     margin-bottom: 15px; /* Add margin between each piece of information */
@@ -34,11 +35,31 @@
     padding: 10px;
   }
 
-  .btn-container-documents {
+  .button-container {
     position: absolute;
     bottom: 80px;
     right: 80px;
     padding: 10px;
+  }
+
+  button {
+    background-color: #8A5FA5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block; /* Full width for mobile, adjust as needed */
+    width: auto; /* Adjust based on your layout requirements */
+  }
+
+  button:hover {
+    background-color: #A07AB1;
+  }
+
+  form {
+    margin: 0;
   }
 </style>
 
@@ -99,7 +120,11 @@
     </script>
   </div>
 
-  <div class="btn-container-documents" th:object="${wniosek}">
-    <a th:href="@{/dzialRekrutacji/przeprowadzenieRekrutacji/wnioski/{wniosekId}/dokumenty(wniosekId=${wniosek.id})}">Lista dokumentów</a>
+  <div class="button-container">
+    <form th:object="${wniosek}" th:action="@{/dzialRekrutacji/przeprowadzenieRekrutacji/wnioski/{wniosekId}/dokumenty(wniosekId=${wniosek.id})}" method="get">
+      <button type="submit">
+        Lista dokumentów
+      </button>
+    </form>
   </div>
 </div>

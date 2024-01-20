@@ -5,6 +5,8 @@ import java.util.List;
 import com.study.PO.entities.kierunek.StopienStudiow;
 import com.study.PO.entities.kierunek.wskaznik.*;
 import com.study.PO.repositories.KryteriumRepository;
+import com.study.PO.repositories.OpiekunRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +33,10 @@ public class KierunekService {
         return repositoryKierunek.findById(id).orElse(null);
     }
 
-    
+    @Transactional
     public Kierunek addKierunek(Kierunek kierunek) {
-        return repositoryKierunek.saveAndFlush(kierunek);
+        return repositoryKierunek.save(kierunek);
     }
-    
 
     public void updateKierunek(Kierunek k){
         repositoryKierunek.save(k);

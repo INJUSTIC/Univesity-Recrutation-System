@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Change Recruitment Fee</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #7A5B99;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #popup2 {
+      background-color: #5D3A7A;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 600px;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    span {
+      display: inline-block;
+      margin: 0 5px;
+      font-weight: bold;
+      color: #F0E68C;
+    }
+    form {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    input[type=submit] {
+      background-color: #8A5FA5;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 20px;
+      font-size: 16px;
+    }
+    input[type=submit]:hover {
+      background-color: #A07AB1;
+    }
+  </style>
+</head>
+<body>
+<div id="popup2" class="popup-container">
+  <h2>
+    Kierunek z taką nazwą już istnieje
+  </h2>
+
+  <!-- Form for Yes button -->
+  <form th:action="@{/DzialIT/zarzadzanieWydzialami/{wydzialId}/dodawanieKierunku(wydzialId=${wydzialId})}" method="get">
+    <input type="submit" value="OK">
+
+  </form>
+</div>
+</body>
+</html>
