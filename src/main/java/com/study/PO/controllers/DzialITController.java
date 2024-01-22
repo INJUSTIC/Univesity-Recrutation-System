@@ -41,11 +41,6 @@ public class DzialITController {
    }
    @GetMapping("/zarzadzanieOplatamiRekrutacyjnymi")
    public String getOplatyRekrutacyjnePage(Model model) {
-    // List<Kierunek> listk = kierunekService.getAllKierunek();
-    // System.out.println("lol");
-    // for (int i = 0; i < listk.size(); i++){
-    //     System.out.println(listk.get(i).getNazwa());
-    // }
        model.addAttribute("kierunki", kierunekService.getAllKierunek());
        return "DzialIT/PU_1_wszytkieKierunki_page";
    }

@@ -54,6 +54,21 @@
         script {
             display: none;
         }
+        form {
+            display: inline-block;
+            margin-right: 10px;
+  }
+  input[type=submit] {
+            background-color: #8A5FA5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -84,6 +99,10 @@
             <script src="/js/submitFormPrzegladajKierunek.js"></script>
 
         </table>
+        <form th:action="@{/gosc/przegladKierunki}" method="get">
+            <input type="submit" value="Wstecz">
+        </form>
     </div>
+    
 </body>
 </html>
