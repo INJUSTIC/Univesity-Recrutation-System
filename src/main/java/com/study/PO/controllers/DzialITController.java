@@ -107,11 +107,9 @@ public String getZmienOplate(Model model, @PathVariable long id,@PathVariable do
         }
         else {
             List<Kierunek> kierunki = kierunekService.getAllKierunek();
-            for (Kierunek kierunek1 : kierunki) {
-                if (kierunek1.getNazwa().equals(kierunek.getNazwa())) {
-                    model.addAttribute("wydzialId", wydzialId);
-                    return "DzialIT/nazwaKierunkuIstnieje";
-                }
+            if (kierunki.stream().anyMatch(k -> k.getNazwa().equals(kierunek.getNazwa()))) {
+                model.addAttribute("wydzialId", wydzialId);
+                return "DzialIT/nazwaKierunkuIstnieje";
             }
             model.addAttribute("kierunekNazwa", kierunek.getNazwa());
             model.addAttribute("wydzialNazwa", wydzialService.getWydzial(wydzialId).getNazwa());
@@ -122,9 +120,11 @@ public String getZmienOplate(Model model, @PathVariable long id,@PathVariable do
     @PostMapping("zarzadzanieWydzialami/{wydzialId}/dodawanieKierunku")
     public String dodawanieKierunku(@PathVariable long wydzialId, HttpSession session) {
         Kierunek kierunek = (Kierunek) session.getAttribute("kierunek");
-        Opiekun savedOpiekun = opiekunService.addOpiekun(kierunek.getOpiekun());
+        Opiekun opiekun = kierunek.getOpiekun();
+        Opiekun savedOpiekun = opiekunService.addOpiekun(opiekun);
         kierunek.setOpiekun(savedOpiekun);
-        kierunek.setWydzial(wydzialService.getWydzial(wydzialId));
+        Wydzial wydzial = wydzialService.getWydzial(wydzialId);
+        kierunek.setWydzial(wydzial);
         kierunekService.addKierunek(kierunek);
         session.removeAttribute("kierunek");
         return "redirect:/DzialIT/zarzadzanieWydzialami";
