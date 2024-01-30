@@ -7,7 +7,7 @@
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <form action="/gosc/obliczwskaznik/I/wyniki" method="post" th:object="${viewModel}" class="requires-validation" novalidate>
+                        <form action="/gosc/obliczwskaznik/egzaminy" method="post" th:object="${viewModel}" class="requires-validation" novalidate>
                             <h5 style="color: #484848; text-align: left; font-size: 22px; font-weight: 400; line-height: 20px; margin-bottom: 5px; margin-top: 10px;">Wybierz egzaminy - poziom podstawowy</h5>
                             <div class="col-md-12">
                                 <select class="selectpicker mt-3" th:field="*{nazwyEgzaminowPodstawa}" multiple required data-live-search="true">
@@ -43,7 +43,8 @@
                             </div>
 
                             <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
-                                <button id="back" type="button" class="btn btn-dark" onclick="goBack()">Wstecz</button>
+<!--                                <button id="back" type="button" class="btn btn-dark" onclick="goBack()">Wstecz</button>-->
+                                <a th:href="@{/gosc/obliczwskaznik/kryteria}" class="btn btn-dark">Wstecz</a>
                                 <button id="submit" type="submit" class="btn btn-info">Dalej</button>
                             </div>
                         </form>

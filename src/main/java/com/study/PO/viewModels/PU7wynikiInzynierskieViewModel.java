@@ -1,5 +1,6 @@
 package com.study.PO.viewModels;
 
+import com.study.PO.entities.kierunek.StopienStudiow;
 import com.study.PO.entities.kierunek.wskaznik.Rodzaje_kryteriow;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.*;
 @Getter
 @NoArgsConstructor
 public class PU7wynikiInzynierskieViewModel {
-    private Rodzaje_kryteriow kryterium;
+//    private Rodzaje_kryteriow kryterium;
 
     private String[] nazwyEgzaminowPodstawa;
     private String[] nazwyEgzaminowRozszerzenie;
@@ -28,19 +29,35 @@ public class PU7wynikiInzynierskieViewModel {
     private double wynikStudiumTalentMatematyka;
     private double wynikStudiumTalentFizyka;
 
+    public void copyAttributes(PU7wynikiInzynierskieViewModel otherViewModel) {
+        this.nazwyEgzaminowPodstawa = otherViewModel.nazwyEgzaminowPodstawa;
+        this.nazwyEgzaminowRozszerzenie = otherViewModel.nazwyEgzaminowRozszerzenie;
+        this.czyStudiumTalentMatematyka = otherViewModel.czyStudiumTalentMatematyka;
+        this.czyStudiumTalentFizyka = otherViewModel.czyStudiumTalentFizyka;
+        this.czyEgzaminRysunek = otherViewModel.czyEgzaminRysunek;
+        this.initWyniki();
+    }
+
     public void initWyniki() {
         wynikiPodstawa = new HashMap<>();
         nazwyEgzaminow = new HashSet<>();
-        for (String nazwaEP : nazwyEgzaminowPodstawa) {
-            wynikiPodstawa.put(nazwaEP, 0.0);
-            nazwyEgzaminow.add(nazwaEP);
-        }
+        if (nazwyEgzaminowPodstawa != null) {
+            for (String nazwaEP : nazwyEgzaminowPodstawa) {
+                wynikiPodstawa.put(nazwaEP, 0.0);
+                nazwyEgzaminow.add(nazwaEP);
+            }
+        } else
+            nazwyEgzaminowPodstawa = new String[0];
 
         wynikiRozszerzenie = new HashMap<>();
-        for (String nazwaER : nazwyEgzaminowRozszerzenie) {
-            wynikiRozszerzenie.put(nazwaER, 0.0);
-            nazwyEgzaminow.add(nazwaER);
+        if (nazwyEgzaminowRozszerzenie != null) {
+            for (String nazwaER : nazwyEgzaminowRozszerzenie) {
+                wynikiRozszerzenie.put(nazwaER, 0.0);
+                nazwyEgzaminow.add(nazwaER);
+            }
         }
+        else
+            nazwyEgzaminowRozszerzenie = new String[0];
         czyEgzaminDodatkowy = czyEgzaminRysunek || czyStudiumTalentFizyka || czyStudiumTalentMatematyka;
 
 //        wynikEgzaminRysunek = 0.0;

@@ -23,6 +23,11 @@ public interface KierunekRepository extends JpaRepository<Kierunek, Long>{
             "WHERE K.nazwa=:nazwaKierunku", nativeQuery = true)
     Long findMPDbyNazwaKierunku(String nazwaKierunku);
 
+    @Query(value = "SELECT KL.id\n" +
+            "FROM ((kierunki K JOIN kryteria_wstepne KW ON K.id=KW.kierunek_id) JOIN kryteria Kr ON KW.kryterium_id=Kr.id) JOIN kryteria_lekarski KL ON Kr.id=KL.id\n" +
+            "WHERE K.nazwa=:nazwaKierunku", nativeQuery = true)
+    Long findKLbyNazwaKierunku(String nazwaKierunku);
+
 //    @Query(value = "SELECT czy_fizyka, czy_biologia, czy_chemia, czy_geografia, czy_informatyka\n" +
 //            "FROM ((kierunki K JOIN kryteria_wstepne KW ON K.id=KW.kierunek_id) JOIN kryteria Kr ON KW.kryterium_id=Kr.id) JOIN maturalne_przedmioty_dodatkowe MPD ON Kr.id=MPD.id\n" +
 //            "WHERE K.nazwa=:nazwaKierunku", nativeQuery = true)

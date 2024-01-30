@@ -7,37 +7,37 @@
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <form action="/gosc/obliczwskaznik/I/wskaznik" method="post" th:object="${viewModel}" class="requires-validation" novalidate>
+                        <form action="/gosc/obliczwskaznik/I/wyniki" method="post" th:object="${viewModel}" class="requires-validation" novalidate>
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
                                     <th style="width: 40%;">Egzamin</th>
-                                    <th style="width: 30%;">Poziom podstawowy</th>
-                                    <th style="width: 30%;">Poziom rozszerzony</th>
+                                    <th style="width: 30%;">Poziom podstawowy (%)</th>
+                                    <th style="width: 30%;">Poziom rozszerzony (%)</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <!-- Use Thymeleaf to iterate over the rows -->
                                     <tr th:each="item : ${viewModel.nazwyEgzaminow}">
                                         <td th:text="${item}" style="width: 40%;"></td>
-                                        <td th:if="${viewModel.wynikiPodstawa.containsKey(item)}" style="width: 30%;">
+                                        <td th:if="${viewModel.wynikiPodstawa != null && viewModel.wynikiPodstawa.containsKey(item)}" style="width: 30%;">
                                             <div>
-                                                <input class="form-control" type="number" th:field="*{wynikiPodstawa[__${item}__]}" required/>
+                                                <input class="form-control" type="number" th:field="*{wynikiPodstawa[__${item}__]}" required min="0" max="100" step="0.1"/>
                                                 <div class="valid-feedback"></div>
-                                                <div class="invalid-feedback">Wynik wymagany</div>
+                                                <div class="invalid-feedback">Wymagany wynik z przedziału [0, 100]</div>
                                             </div>
                                         </td>
-                                        <td th:unless="${viewModel.wynikiPodstawa.containsKey(item)}" style="width: 30%;">
+                                        <td th:unless="${viewModel.wynikiPodstawa == null || viewModel.wynikiPodstawa.containsKey(item)}" style="width: 30%;">
                                         </td>
-                                        <td th:if="${viewModel.wynikiRozszerzenie.containsKey(item)}" style="width: 30%;">
+                                        <td th:if="${viewModel.wynikiRozszerzenie != null && viewModel.wynikiRozszerzenie.containsKey(item)}" style="width: 30%;">
                                             <div>
 <!--                                                <input class="form-control" type="number" th:value="${viewModel.wynikiRozszerzenie[item]}" required/>-->
-                                                <input class="form-control" type="number" th:field="*{wynikiRozszerzenie[__${item}__]}" required/>
+                                                <input class="form-control" type="number" th:field="*{wynikiRozszerzenie[__${item}__]}" required min="0" max="100" step="0.1"/>
                                                 <div class="valid-feedback"></div>
-                                                <div class="invalid-feedback">Wynik wymagany</div>
+                                                <div class="invalid-feedback">Wymagany wynik z przedziału [0, 100]</div>
                                             </div>
                                         </td>
-                                        <td th:unless="${viewModel.wynikiRozszerzenie.containsKey(item)}" style="width: 30%;">
+                                        <td th:unless="${viewModel.wynikiRozszerzenie == null || viewModel.wynikiRozszerzenie.containsKey(item)}" style="width: 30%;">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -56,9 +56,9 @@
                                         <td style="width: 40%;">Egzamin z rysunku</td>
                                         <td style="width: 60%;">
                                             <div>
-                                                <input class="form-control" type="number" th:value="${viewModel.wynikEgzaminRysunek}" required/>
+                                                <input class="form-control" type="number" th:field="*{wynikEgzaminRysunek}" required min="0" max="660" step="1"/>
                                                 <div class="valid-feedback"></div>
-                                                <div class="invalid-feedback">Wynik wymagany</div>
+                                                <div class="invalid-feedback">Wymagany wynik z przedziału [0, 660]</div>
                                             </div>
                                         </td>
                                     </tr>
@@ -66,9 +66,9 @@
                                         <td style="width: 40%;">Studium Talent - matematyka</td>
                                         <td style="width: 60%;">
                                             <div>
-                                                <input class="form-control" type="number" th:value="${viewModel.wynikStudiumTalentMatematyka}" required/>
+                                                <input class="form-control" type="number" th:field="*{wynikStudiumTalentMatematyka}" required min="2" max="5.5" step="0.5"/>
                                                 <div class="valid-feedback"></div>
-                                                <div class="invalid-feedback">Wynik wymagany</div>
+                                                <div class="invalid-feedback">Wymagany wynik z przedziału [2.0, 5.5]</div>
                                             </div>
                                         </td>
                                     </tr>
@@ -76,9 +76,9 @@
                                         <td style="width: 40%;">Studium Talent - fizyka</td>
                                         <td style="width: 60%;">
                                             <div>
-                                                <input class="form-control" type="number" th:value="${viewModel.wynikStudiumTalentFizyka}" required/>
+                                                <input class="form-control" type="number" th:field="*{wynikStudiumTalentFizyka}" required min="2" max="5.5" step="0.5"/>
                                                 <div class="valid-feedback"></div>
-                                                <div class="invalid-feedback">Wynik wymagany</div>
+                                                <div class="invalid-feedback">Wymagany wynik z przedziału [2.0, 5.5]</div>
                                             </div>
                                         </td>
                                     </tr>
@@ -87,8 +87,7 @@
 
                             <div class="col-md-12">
                                 <select id="nazwaKierunku" name="nazwaKierunku" class="form-select mt-3" required>
-                                    <option selected disabled value="">Kierunek</option>
-                                    <option th:each="nazwa : ${nazwyKierunkow}" th:value="${nazwa}" th:text="${nazwa}"></option>
+                                    <option th:each="nazwa : ${nazwyKierunkow}" th:value="${nazwa}" th:text="${nazwa}" th:selected="${nazwa == kierunek}">
                                 </select>
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Proszę wybrać nazwę kierunku!</div>
@@ -101,14 +100,23 @@
                             <span>
                                 <h3 th:text="${wskaznik} != null ? ${wskaznik} : ''"></h3>
                             </span>
+<!--                            <span th:if="${wskaznik != null}">-->
+<!--                                <h3 th:text="{wskaznik}"></h3>-->
+<!--                            </span>-->
 <!--                            <p>Wskaźnik rekrutacyjny: </p>-->
 <!--                            <span>-->
 <!--                                <h3 id="wskaznikValue"></h3>-->
 <!--                            </span>-->
                             <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
-                                <button id="back" type="button" class="btn btn-dark" onclick="goBack()">Wstecz</button>
+                                <a th:href="@{/gosc/obliczwskaznik/egzaminy}" class="btn btn-dark">Wstecz</a>
                             </div>
                         </form>
+<!--                        <form action="/gosc/obliczwskaznik/kryteria" method="post">-->
+<!--                            <input type="hidden" id="kryterium" name="kryterium" th:value="${kryterium}" class="form-select mt-3">-->
+<!--                            <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">-->
+<!--                                <button id="submit2" type="submit" class="btn btn-dark">Wstecz</button>-->
+<!--                            </div>-->
+<!--                        </form>-->
                     </div>
                 </div>
             </div>

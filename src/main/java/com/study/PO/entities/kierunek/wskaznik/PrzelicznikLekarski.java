@@ -3,17 +3,16 @@ package com.study.PO.entities.kierunek.wskaznik;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PrzelicznikMaturaPolska implements PrzelicznikKryterium{
+public class PrzelicznikLekarski implements PrzelicznikKryterium {
 
-    private MaturalnyPrzedmiotDodatkowy kryteria;
+    private KryteriumLekarski kryteria;
 
-    public PrzelicznikMaturaPolska(MaturalnyPrzedmiotDodatkowy kryteria) {
+    public PrzelicznikLekarski(KryteriumLekarski kryteria) {
         this.kryteria = kryteria;
     }
 
     @Override
     public double przeliczKryterium(Wyniki wyniki) {
-
         Map<String, Double> podstawa = wyniki.getWynikiPodstawa();
         Map<String, Double> rozszerzenie = wyniki.getWynikiRozszerzenie();
 
@@ -137,6 +136,6 @@ public class PrzelicznikMaturaPolska implements PrzelicznikKryterium{
 
         double jezyk_obcy = Math.max(jezyk_obcyPodstawa, Math.max(jezyk_obcyPodstawa + 1.5 * jezyk_obcyRozszerzenie, 2.5 * jezyk_obcyRozszerzenie));
         double jezyk_polski = Math.max(polskiPodstawa, polskiRozszerzenie);
-        return (matematyka + przedmiotDodatkowy + (0.1 * jezyk_obcy) + (0.1 * jezyk_polski));
+        return ((biologiaRozszerzenie * kryteria.getMnoznikBiologia()) + matematyka + przedmiotDodatkowy + (0.1 * jezyk_obcy) + (0.1 * jezyk_polski));
     }
 }

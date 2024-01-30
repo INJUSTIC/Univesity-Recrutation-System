@@ -7,6 +7,9 @@ public class PrzelicznikFactory {
             case "MATURA_POLSKA" -> {
                 return new PrzelicznikMaturaPolska((MaturalnyPrzedmiotDodatkowy) kryterium);
             }
+            case "LEKARSKI" -> {
+                return new PrzelicznikLekarski((KryteriumLekarski) kryterium);
+            }
         }
         return null;
     }

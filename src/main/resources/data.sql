@@ -82,7 +82,8 @@ INSERT INTO kryteria (Nazwa) VALUES
     ('MATURA_POLSKA'),
     ('MATURA_POLSKA'),
     ('MATURA_POLSKA'),
-    ('MATURA_POLSKA');
+    ('MATURA_POLSKA'),
+    ('LEKARSKI');
 
 -- Insert data into maturalne_przedmioty_dodatkowe
 INSERT INTO maturalne_przedmioty_dodatkowe (id, czy_fizyka, czy_biologia, czy_chemia, czy_geografia, czy_informatyka) VALUES
@@ -119,6 +120,10 @@ INSERT INTO maturalne_przedmioty_dodatkowe (id, czy_fizyka, czy_biologia, czy_ch
     (31, true, true, true, true, false),
     (32, true, true, true, true, true);
 
+-- Insert data into kryteria_lekarski
+INSERT INTO kryteria_lekarski (id, mnoznik_biologia, czy_fizyka, czy_biologia, czy_chemia, czy_geografia, czy_informatyka) VALUES
+    (33, 2.5, true, true, true, true, true);
+
 -- Insert data into kryteria_wstepne
 INSERT INTO kryteria_wstepne (kierunek_id, kryterium_id) VALUES
 (1,17),
@@ -134,7 +139,7 @@ INSERT INTO kryteria_wstepne (kierunek_id, kryterium_id) VALUES
 (11,17),
 (12,17),
 (13,18),
-(14,21);
+(14,33);
 
 -- Insert data into kandydaci
 INSERT INTO kandydaci (login, haslo) VALUES

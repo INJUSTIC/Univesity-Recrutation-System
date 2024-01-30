@@ -75,16 +75,12 @@ public class KierunekService {
     public Kryterium getKryteriumOnNazwaKierunkuRodzajKryterium(String nazwaKierunku, Rodzaje_kryteriow rodzajKryt){
         switch (rodzajKryt) {
             case MATURA_POLSKA -> {
-//                KierunekRepository.MPDvalues zapytanie = repositoryKierunek.findMPDbyNazwaKierunku(nazwaKierunku);
-//                boolean czyFizyka = zapytanie.getCzyFizyka() != null ? zapytanie.getCzyFizyka() : false;
-//                boolean czyBiologia = zapytanie.getCzyBiologia() != null ? zapytanie.getCzyBiologia() : false;
-//                boolean czyChemia = zapytanie.getCzyChemia() != null ? zapytanie.getCzyChemia() : false;
-//                boolean czyGeografia = zapytanie.getCzyGeografia() != null ? zapytanie.getCzyGeografia() : false;
-//                boolean czyInformatyka = zapytanie.getCzyInformatyka() != null ? zapytanie.getCzyInformatyka() : false;
-//                MaturalnyPrzedmiotDodatkowy mpd = new MaturalnyPrzedmiotDodatkowy(czyFizyka, czyBiologia, czyChemia, czyGeografia, czyInformatyka);
-//                return mpd;
                 Long mpdId = repositoryKierunek.findMPDbyNazwaKierunku(nazwaKierunku);
                 return repositoryKryterium.findById(mpdId).isEmpty() ? null : (MaturalnyPrzedmiotDodatkowy) repositoryKryterium.findById(mpdId).get();
+            }
+            case LEKARSKI -> {
+                Long klId = repositoryKierunek.findKLbyNazwaKierunku(nazwaKierunku);
+                return repositoryKryterium.findById(klId).isEmpty() ? null : (KryteriumLekarski) repositoryKryterium.findById(klId).get();
             }
         }
         return null;

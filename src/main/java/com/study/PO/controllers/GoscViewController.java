@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -41,99 +42,169 @@ public class GoscViewController {
     }
 
     @GetMapping("/gosc/obliczwskaznik")
-    public String getObliczanieWskaznika() {
+    public String getPU7WyborStopnia() {
         return "gosc/PU7_wybor_stopnia";
     }
 
     @PostMapping("/gosc/obliczwskaznik")
-    public String getPU7StopienStudiow(@RequestParam int stopienStudiow, Model model) {
+    public String postPU7WyborStopnia(@RequestParam int stopienStudiow, HttpSession session) {
         StopienStudiow stStud = stopienStudiow == 1 ? StopienStudiow.I : StopienStudiow.II;
-        model.addAttribute("stopienStudiow", stopienStudiow);
+        session.setAttribute("stopienStudiow", stStud);
+        return "redirect:/gosc/obliczwskaznik/kryteria";
+    }
 
-        if (stStud == StopienStudiow.I) {
-            List<String> rodzajeKryteriow = kierunekService.getRodzajeKryteriowStopienStudiow(stStud);
+    @GetMapping("/gosc/obliczwskaznik/kryteria")
+    public String getPU7Kryteria(Model model, HttpSession session){
+        if (session.getAttribute("stopienStudiow") == null)
+            return "redirect:/gosc/obliczwskaznik";
+        StopienStudiow stopienStudiow = (StopienStudiow) session.getAttribute("stopienStudiow");
+        if (stopienStudiow == StopienStudiow.I) {
+            List<String> rodzajeKryteriow = kierunekService.getRodzajeKryteriowStopienStudiow(stopienStudiow);
             List<String> zmienioneRodzajeKryteriow = rodzajeKryteriow.stream()
                     .map(str -> str.toLowerCase().replace("_", " "))
                     .collect(Collectors.toList());
             model.addAttribute("rodzajeKryteriow", zmienioneRodzajeKryteriow);
-            return "gosc/PU7_wybor_kryterium";
-        }
+        } else {
 
-        model.addAttribute("viewModel", new PU7wynikiMagisterskieViewModel());
-        return "gosc/PU7_wyniki_II_stopien";
+        }
+        return "gosc/PU7_wybor_kryterium";
     }
 
-
     @PostMapping("/gosc/obliczwskaznik/kryteria")
-    public String getPU7Kryteria(@RequestParam String kryterium, Model model, HttpSession session) {
-        List<String> nazwyEgzaminow = new ArrayList<>();
+    public String postPU7Kryteria(@RequestParam String kryterium, HttpSession session) {
         if (kryterium.equals("matura polska")) {
+            session.setAttribute("kryterium", Rodzaje_kryteriow.MATURA_POLSKA);
+        } else {
+            if (kryterium.equals("lekarski")) {
+                session.setAttribute("kryterium", Rodzaje_kryteriow.LEKARSKI);
+            }
+        }
+        return "redirect:/gosc/obliczwskaznik/egzaminy";
+    }
+
+    @GetMapping("/gosc/obliczwskaznik/egzaminy")
+    public String getPU7Egzaminy(Model model, HttpSession session) {
+        if (session.getAttribute("kryterium") == null)
+            return "redirect:/gosc/obliczwskaznik";
+        Rodzaje_kryteriow kryterium = (Rodzaje_kryteriow) session.getAttribute("kryterium");
+        List<String> nazwyEgzaminow = new ArrayList<>();
+
+        if (kryterium == Rodzaje_kryteriow.MATURA_POLSKA || kryterium == Rodzaje_kryteriow.LEKARSKI) {
             for (MaturalnePrzedmiotyObowiazkowe przedmiot : MaturalnePrzedmiotyObowiazkowe.values()){
                 nazwyEgzaminow.add(przedmiot.name().toLowerCase().replace("_", " ").replace("jezyk", "język"));
             }
             for (MaturalnePrzedmiotyDodatkowe przedmiot : MaturalnePrzedmiotyDodatkowe.values()){
                 nazwyEgzaminow.add(przedmiot.name().toLowerCase().replace("_", " ").replace("jezyk", "język"));
             }
-            model.addAttribute("nazwyEgzaminow", nazwyEgzaminow);
-            session.setAttribute("kryterium", Rodzaje_kryteriow.MATURA_POLSKA);
         } else {
-            if (kryterium.equals(Rodzaje_kryteriow.MATURA_IB.name())) {
+            if (kryterium == Rodzaje_kryteriow.MATURA_IB) {
                 nazwyEgzaminow.add("Jakis tam egzamin IB");
-                model.addAttribute("viewModel", new PU7wyborEgzaminowMaturalnychViewModel());
-                session.setAttribute("kryterium", Rodzaje_kryteriow.MATURA_IB);
+//                session.setAttribute("kryterium", Rodzaje_kryteriow.MATURA_IB.name().toLowerCase().replace('_', ' '));
             } else {
                 nazwyEgzaminow.add("Jakis tam egzamin Matury zagranicznej");
-                model.addAttribute("viewModel", new PU7wyborEgzaminowMaturalnychViewModel());
             }
         }
-        PU7wynikiInzynierskieViewModel vm =  new PU7wynikiInzynierskieViewModel();
-//        vm.setKryterium(Rodzaje_kryteriow.MATURA_POLSKA);
-        model.addAttribute("viewModel", vm);
-        session.setAttribute("viewModel", vm);
+        PU7wynikiInzynierskieViewModel viewModel = new PU7wynikiInzynierskieViewModel();
+        model.addAttribute("viewModel", viewModel);
+        session.setAttribute("viewModel", session);
+        model.addAttribute("nazwyEgzaminow", nazwyEgzaminow);
+
         return "gosc/PU7_wybor_egzaminow";
     }
 
-    @PostMapping("/gosc/obliczwskaznik/I/wyniki")
-    public String getPU7Wyniki(@ModelAttribute("viewModel") PU7wynikiInzynierskieViewModel viewModel, @SessionAttribute("viewModel") PU7wynikiInzynierskieViewModel sessionViewModel, Model model, HttpSession session) {
-        if (sessionViewModel.getWynikiPodstawa() == null || sessionViewModel.getWynikiRozszerzenie() == null) {
-            sessionViewModel.setNazwyEgzaminowPodstawa(viewModel.getNazwyEgzaminowPodstawa());
-            sessionViewModel.setNazwyEgzaminowRozszerzenie(viewModel.getNazwyEgzaminowRozszerzenie());
-            sessionViewModel.initWyniki();
-        }
-        viewModel.setWynikiPodstawa(sessionViewModel.getWynikiPodstawa());
-        viewModel.setWynikiRozszerzenie(sessionViewModel.getWynikiRozszerzenie());
-        viewModel.setNazwyEgzaminow(sessionViewModel.getNazwyEgzaminow());
-        viewModel.setCzyEgzaminDodatkowy(sessionViewModel.isCzyEgzaminDodatkowy());
+    @PostMapping("/gosc/obliczwskaznik/egzaminy")
+    public String postPU7Egzaminy(@ModelAttribute("viewModel")PU7wynikiInzynierskieViewModel viewModel, Model model, HttpSession session) {
+        if (session.getAttribute("viewModel") == null)
+            return "redirect:/gosc/obliczwskaznik";
+//        PU7wynikiInzynierskieViewModel sessionViewModel = (PU7wynikiInzynierskieViewModel) session.getAttribute("viewModel");
+//        if (sessionViewModel.getWynikiPodstawa() == null || sessionViewModel.getWynikiRozszerzenie() == null) {
+//            sessionViewModel.copyAttributes(viewModel);
+//        }
+        viewModel.initWyniki();
+
+        session.setAttribute("viewModel", viewModel);
+        return "redirect:/gosc/obliczwskaznik/I/wyniki";
+    }
+
+    @GetMapping("/gosc/obliczwskaznik/I/wyniki")
+    public String getPU7Wyniki(Model model, HttpSession session) {
+        if (session.getAttribute("viewModel") == null)
+            return "redirect:/gosc/obliczwskaznik";
+        PU7wynikiInzynierskieViewModel sessionViewModel = (PU7wynikiInzynierskieViewModel) session.getAttribute("viewModel");
 
         List<Kierunek> kierunki = kierunekService.getAllKierunek();
-        List<String> nazwyKierunkow = kierunki.stream()
-                .map(k -> k.getNazwa())
-                .collect(Collectors.toList());
+        Rodzaje_kryteriow kryterium = (Rodzaje_kryteriow) session.getAttribute("kryterium");
+        List<String> nazwyKierunkow;
+        if (kryterium == Rodzaje_kryteriow.LEKARSKI)
+            nazwyKierunkow = Arrays.asList("Lekarski");
+        else
+            nazwyKierunkow = kierunki.stream()
+                .map(Kierunek::getNazwa)
+                .filter(nazwa -> !nazwa.equalsIgnoreCase("lekarski"))
+                .toList();
+
+//        List<String> nazwyKierunkow = kierunki.stream()
+//                .map(k -> k.getNazwa())
+//                .collect(Collectors.toList());
         model.addAttribute("nazwyKierunkow", nazwyKierunkow);
-        session.setAttribute("nazwyKierunkow", nazwyKierunkow);
-        model.addAttribute("viewModel", viewModel);
-//        if (sessionViewModel == null)
-//            session.setAttribute("viewModel", viewModel);
+        if (session.getAttribute("kierunek") != null)
+            model.addAttribute("kierunek", (String) session.getAttribute("kierunek"));
+        else
+            model.addAttribute("kierunek", "");
+        model.addAttribute("viewModel", sessionViewModel);
+        model.addAttribute("kryterium", (String) session.getAttribute("kryterium").toString());
+        if (session.getAttribute("wskaznik") != null)
+            model.addAttribute("wskaznik", (String) session.getAttribute("wskaznik"));
         return "gosc/PU7_wyniki_I_stopien";
     }
 
-    @PostMapping("/gosc/obliczwskaznik/I/wskaznik")
-    public String getPU7Wskaznik(@ModelAttribute("viewModel") PU7wynikiInzynierskieViewModel pageViewModel, @SessionAttribute("viewModel") PU7wynikiInzynierskieViewModel viewModel, @SessionAttribute("kryterium") Rodzaje_kryteriow kryterium, @SessionAttribute("nazwyKierunkow") List<String> nazwyKierunkow, @RequestParam String nazwaKierunku, Model model) {
+    @PostMapping("/gosc/obliczwskaznik/I/wyniki")
+    public String postPU7Wskaznik(@ModelAttribute("viewModel")PU7wynikiInzynierskieViewModel pageViewModel, @RequestParam String nazwaKierunku, Model model, HttpSession session) {
+        if (session.getAttribute("kryterium") == null || session.getAttribute("viewModel") == null)
+            return "redirect:/gosc/obliczwskaznik";
+        PU7wynikiInzynierskieViewModel viewModel = (PU7wynikiInzynierskieViewModel) session.getAttribute("viewModel");
+        Rodzaje_kryteriow kryterium = (Rodzaje_kryteriow) session.getAttribute("kryterium");
         Kryterium krytObj = kierunekService.getKryteriumOnNazwaKierunkuRodzajKryterium(nazwaKierunku, kryterium);
-        if (kryterium != null) {
+        if (krytObj != null) {
             PrzelicznikKryterium przelicznik = PrzelicznikFactory.getPrzelicznik(krytObj);
             if (przelicznik != null) {
+                viewModel.initWyniki();
                 viewModel.setWynikiPodstawa(pageViewModel.getWynikiPodstawa());
                 viewModel.setWynikiRozszerzenie(pageViewModel.getWynikiRozszerzenie());
+                viewModel.setWynikEgzaminRysunek(pageViewModel.getWynikEgzaminRysunek());
+                viewModel.setWynikStudiumTalentMatematyka(pageViewModel.getWynikStudiumTalentMatematyka());
+                viewModel.setWynikStudiumTalentFizyka(pageViewModel.getWynikStudiumTalentFizyka());
                 Map<String, Double> wyniki1 = viewModel.getWynikiPodstawa();
                 Map<String, Double> wyniki2 = viewModel.getWynikiRozszerzenie();
                 double wynik = przelicznik.przeliczKryterium(new Wyniki(wyniki1, wyniki2));
-                model.addAttribute("wskaznik", wynik);
+                if (viewModel.isCzyStudiumTalentFizyka() || viewModel.isCzyStudiumTalentMatematyka()){
+                    double stFizyka = 0;
+                    double stMatematyka = 0;
+                    if (viewModel.isCzyStudiumTalentFizyka())
+                        stFizyka = viewModel.getWynikStudiumTalentFizyka();
+                    if (viewModel.isCzyStudiumTalentMatematyka())
+                        stMatematyka = viewModel.getWynikStudiumTalentMatematyka();
+                    double studium = Math.max(stFizyka, stMatematyka);
+                    if (studium >= 3.0 && studium < 4.0)
+                        wynik = Math.max(535.0, wynik + 30.0);
+                    else {
+                        if (studium >= 4.0 && studium < 5.0)
+                            wynik = Math.max(535.0, wynik + 40.0);
+                        else {
+                            if (studium >= 5.0)
+                                wynik = 535.0;
+                        }
+                    }
+                }
+                if (nazwaKierunku.equalsIgnoreCase("architektura") && viewModel.isCzyEgzaminRysunek())
+                    wynik += viewModel.getWynikEgzaminRysunek();
+                String wynikString = String.format("%.2f", wynik);
+                session.setAttribute("wskaznik", wynikString);
             }
         }
-        model.addAttribute("viewModel", viewModel);
-        model.addAttribute("nazwyKierunkow", nazwyKierunkow);
-        return "gosc/PU7_wyniki_I_stopien";
+        session.setAttribute("viewModel", viewModel);
+        session.setAttribute("kierunek", nazwaKierunku);
+        return "redirect:/gosc/obliczwskaznik/I/wyniki";
     }
 
 //    @PostMapping("/gosc/obliczwskaznik/I/wyniki")
