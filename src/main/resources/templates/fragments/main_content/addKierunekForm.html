@@ -196,7 +196,7 @@
                                 <label for="opiekunKierunku">Opiekun kierunku</label>
                                 <select id="opiekunKierunku" name="opiekunKierunku" class="form-select mt-3" required th:field="*{opiekun}">
                                     <option selected disabled value="">Wybierz opiekuna</option>
-                                    <option th:each="item : ${opiekunowi}" th:value="${item.id}" th:text="${item.getImie() + ' ' + item.getNazwisko()}"></option>
+                                    <option th:each="item : ${opiekunowi}" th:value="${item.id}" th:text="${item.getNazwisko() + ' ' + item.getImie()}"></option>
                                 </select>
                             </div>
                             <br>

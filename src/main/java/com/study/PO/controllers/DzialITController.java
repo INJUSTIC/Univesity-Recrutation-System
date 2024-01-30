@@ -1,5 +1,6 @@
 package com.study.PO.controllers;
 
+import java.util.Comparator;
 import java.util.List;
 
 import com.study.PO.entities.kierunek.Opiekun;
@@ -89,6 +90,7 @@ public String getZmienOplate(Model model, @PathVariable long id,@PathVariable do
             kierunek = new Kierunek();
         }
         List<Opiekun> opiekunowi = opiekunService.getAllOpiekuny();
+        opiekunowi.sort(Comparator.comparing(Opiekun::getNazwisko));
         model.addAttribute("opiekunowi", opiekunowi);
         model.addAttribute("kierunek", kierunek);
         model.addAttribute("wydzialId", wydzialId);

@@ -109,7 +109,8 @@ public class DzialRekrutacjiController {
 
     @GetMapping("/przeprowadzenieRekrutacji/wnioski/{wniosekId}/dokumenty/{dokumentId}/pobierz")
     public ResponseEntity<InputStreamResource> pobierzDokument(@PathVariable long dokumentId) throws IOException {
-        String documentName = dokumentService.getDokument(dokumentId).getNazwaDokumentu();
+        Dokument document = dokumentService.getDokument(dokumentId);
+        String documentName = document.getNazwaDokumentu();
         Resource documentResource = resourceLoader.getResource("classpath:plikiDokumentow/" + documentName);
         InputStream documentStream = documentResource.getInputStream();
 
@@ -119,10 +120,11 @@ public class DzialRekrutacjiController {
         // Set the content type based on the document type
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE);
 
-        return ResponseEntity
+        ResponseEntity result = ResponseEntity
                 .ok()
                 .headers(headers)
                 .body(new InputStreamResource(documentStream));
+        return result;
     }
 
    private List<DaneIdentWniosek> getDaneIdentWniosek(List<Wniosek> wnioski) {
