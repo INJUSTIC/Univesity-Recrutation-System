@@ -1,0 +1,41 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"-->
+<!--      layout:decorate="~{layout}">-->
+<!--<head>-->
+<!--    <title>Nowy wniosek</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div layout:fragment="top_nav_bar" class="top_section">-->
+<!--    <div layout:insert="~{fragments/top_bar/kandydat}"></div>-->
+<!--</div>-->
+
+<!--<div layout:fragment="main_content" class="middle_section">-->
+<!--    <div layout:insert="~{fragments/main_content/dane_personalne}"></div>-->
+<!--</div>-->
+
+<!--<div layout:fragment="bottom_bar" class="bottom_section">-->
+<!--    <div layout:insert="~{fragments/bottom_bar/bottom_bar}"></div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout_boot}">
+    <head>
+        <title>Gość</title>
+    </head>
+    <body>
+        <div layout:fragment="top_nav_bar">
+            <div layout:insert="~{fragments/top_bar/kandydat_boot}"></div>
+        </div>
+
+        <div layout:fragment="main_content" class="middle_section">
+            <div layout:insert="~{fragments/main_content/PU5_dane_personalne}"></div>
+        </div>
+
+        <div layout:fragment="bottom_bar">
+            <div layout:insert="~{fragments/bottom_bar/bottom_bar_boot}"></div>
+        </div>
+    </body>
+</html>

@@ -30,7 +30,9 @@ INSERT INTO opiekunowie (imię, nazwisko) VALUES
     ('Jagoda', 'Górska'),
     ('Marlena', 'Chmielewska'),
     ('Witold', 'Michalik'),
-    ('Jarosław', 'Kowalczyk');
+    ('Jarosław', 'Kowalczyk'),
+    ('Krzysztof', 'Jagiełło'),
+    ('Marta', 'Polańska');
 
 
 INSERT INTO kierunki (cena_za_wniosek, liczba_chetnych, liczba_os_na_miejsce, nazwa, plan_studiow, prog_punktowy, progn_liczba_miejsc, stopien_studiow, opiekun_id, wydzial_id) VALUES
@@ -47,7 +49,9 @@ INSERT INTO kierunki (cena_za_wniosek, liczba_chetnych, liczba_os_na_miejsce, na
     (85.0, 0, 0, 'Inżynieria kwantowa', 'sciezka_do_planu_studiow', 0, 70, 'I', 11, 11),
     (85.0, 0, 0, 'Automatyka i robotyka', 'sciezka_do_planu_studiow', 0, 80, 'I', 12, 12),
     (85.0, 0, 0, 'Matematyka i analiza danych', 'sciezka_do_planu_studiow', 0, 50, 'I', 13, 13),
-    (85.0, 0, 0, 'Lekarski', 'sciezka_do_planu_studiow', 0, 60, 'I', 14, 14);
+    (85.0, 0, 0, 'Lekarski', 'sciezka_do_planu_studiow', 0, 60, 'I', 14, 14),
+    (150.0, 0, 0, 'Sztuczna inteligencja', 'sciezka_do_planu_studiow', 0, 50, 'II', 15, 1),
+    (200.0, 0, 0, 'Architektura i urbanistyka', 'sciezka_do_planu_studiow', 0, 8, 'III', 16, 4);
 
 -- Insert data into kryteria
 INSERT INTO kryteria (Nazwa) VALUES

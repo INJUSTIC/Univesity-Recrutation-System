@@ -78,4 +78,6 @@ class RecrutationSystemApplicationTests {
 		Kandydat result = kandydatService.getKandydat(kandydatId);
 		assertNull(result);
 	}
+
+
 }

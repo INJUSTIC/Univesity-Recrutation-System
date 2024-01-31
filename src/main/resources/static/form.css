@@ -157,3 +157,14 @@ h5 {
     margin-bottom: 5px;
     margin-top: 10px;
 }
+
+.error-message {
+    color: #cc404e;
+    font-size: 14px;
+    /* Add any other styles as needed */
+}
+
+p.form-error-text {
+    color: #cc404e;
+    font-size: 14px;
+}

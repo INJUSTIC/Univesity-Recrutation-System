@@ -33,6 +33,8 @@ public class KierunekService {
         return repositoryKierunek.findById(id).orElse(null);
     }
 
+    public List<Kierunek> getAllKierunekByStopienStudiow(String stopienStudiow){ return repositoryKierunek.findKierunkiByStopienStudiow(stopienStudiow); }
+
     @Transactional
     public Kierunek addKierunek(Kierunek kierunek) {
         return repositoryKierunek.save(kierunek);
