@@ -127,6 +127,6 @@ public String getZmienOplate(Model model, @PathVariable long id,@PathVariable do
         kierunek.setWydzial(wydzial);
         kierunekService.addKierunek(kierunek);
         session.removeAttribute("kierunek");
-        return "redirect:/DzialIT/zarzadzanieWydzialami";
+        return "redirect:/DzialIT/zarzadzanieWydzialami/" + wydzialId;
     }
 }
