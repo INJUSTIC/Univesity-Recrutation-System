@@ -41,23 +41,13 @@ public class KandydatViewController {
         return "kandydat/main";
     }
 
-//    @GetMapping("/kandydat/defwniosku/danepersonalne")
-//    public String getPU5DanePersonalne(Model model) {
-//        model.addAttribute("danePersonalne", new DanePersonalne());
-//        return "kandydat/PU5_dane_personalne";
-//    }
     @GetMapping("/kandydat/defwniosku/danepersonalne")
-    public String getPU5DanePersonalne(DanePersonalne danePersonalne) {
+    public String getPU5DanePersonalne() {
         return "kandydat/PU5_dane_personalne";
     }
 
-//    @PostMapping("/kandydat/defwniosku/danepersonalne")
-//    public String postDanePersonalne(@ModelAttribute("danePersonalne") DanePersonalne danePersonalne, Model model, HttpSession session) {
-//        session.setAttribute("danePersonalne", danePersonalne);
-//        return "redirect:/kandydat/defwniosku/wyborstopnia";
-//    }
     @PostMapping("/kandydat/defwniosku/danepersonalne")
-    public String postDanePersonalne(@Valid DanePersonalne danePersonalne, BindingResult bindingResult, HttpSession session) {
+    public String postPU5DanePersonalne(@Valid DanePersonalne danePersonalne, BindingResult bindingResult, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "kandydat/PU5_dane_personalne";
         }
@@ -78,7 +68,7 @@ public class KandydatViewController {
     }
 
     @GetMapping("/kandydat/defwniosku/wyborkierunku")
-    public String getPU7WyborKierunku(Model model, HttpSession session) {
+    public String getPU5WyborKierunku(Model model, HttpSession session) {
         if (session.getAttribute("stopienStudiow") == null)
             return "redirect:/kandydat/defwniosku/danepersonalne";
         StopienStudiow stopStud = (StopienStudiow) session.getAttribute("stopienStudiow");
@@ -92,13 +82,13 @@ public class KandydatViewController {
     }
 
     @PostMapping("/kandydat/defwniosku/wyborkierunku")
-    public String postPU7WyborKierunku(@RequestParam String nazwaKierunku, HttpSession session) {
+    public String postPU5WyborKierunku(@RequestParam String nazwaKierunku, HttpSession session) {
         session.setAttribute("kierunek", nazwaKierunku);
         return "redirect:/kandydat/defwniosku/danedodatkowe";
     }
 
     @GetMapping("/kandydat/defwniosku/danedodatkowe")
-    public String getPU7DaneDodatkowe(Model model, HttpSession session) {
+    public String getPU5DaneDodatkowe(Model model, HttpSession session) {
         if (session.getAttribute("stopienStudiow") == null || session.getAttribute("kierunek") == null)
             return "redirect:/kandydat/defwniosku/danepersonalne";
         StopienStudiow stopStud = (StopienStudiow) session.getAttribute("stopienStudiow");
@@ -121,7 +111,7 @@ public class KandydatViewController {
     }
 
     @PostMapping("/kandydat/defwniosku/danedodatkowe/inz")
-    public String postDaneDodatkowe(@Valid DaneDodatkoweInz daneDodatkowe, BindingResult bindingResult, HttpSession session) {
+    public String postPU5DaneDodatkowe(@Valid DaneDodatkoweInz daneDodatkowe, BindingResult bindingResult, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "kandydat/PU5_dane_dodatkowe";
         }
@@ -130,7 +120,7 @@ public class KandydatViewController {
     }
 
     @PostMapping("/kandydat/defwniosku/danedodatkowe/mag")
-    public String postDaneDodatkowe(@Valid DaneDodatkoweMag daneDodatkowe, BindingResult bindingResult, HttpSession session) {
+    public String postPU5DaneDodatkowe(@Valid DaneDodatkoweMag daneDodatkowe, BindingResult bindingResult, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "kandydat/PU5_dane_dodatkowe";
         }
@@ -139,7 +129,7 @@ public class KandydatViewController {
     }
 
     @PostMapping("/kandydat/defwniosku/danedodatkowe/dok")
-    public String postDaneDodatkowe(@Valid DaneDodatkoweDok daneDodatkowe, BindingResult bindingResult, HttpSession session) {
+    public String postPU5DaneDodatkowe(@Valid DaneDodatkoweDok daneDodatkowe, BindingResult bindingResult, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "kandydat/PU5_dane_dodatkowe";
         }
@@ -148,17 +138,17 @@ public class KandydatViewController {
     }
 
     @GetMapping("/kandydat/defwniosku/dolaczaniedokumentow")
-    public String getPU7DolaczanieDokumentow() {
+    public String getPU5DolaczanieDokumentow() {
         return "kandydat/PU5_dolaczanie_dokumentow";
     }
 
     @GetMapping("/kandydat/defwniosku/potwierdzenie")
-    public String getPU7Potwierdzenie() {
+    public String getPU5Potwierdzenie() {
         return "kandydat/PU5_potwierdzenie";
     }
 
     @PostMapping("/kandydat/defwniosku/potwierdzenie")
-    public String postPU7Potwierdzenie(HttpSession session) {
+    public String postPU5Potwierdzenie(HttpSession session) {
         if (session.getAttribute("danePersonalne") == null || session.getAttribute("daneDodatkowe") == null || session.getAttribute("kierunek") == null || session.getAttribute("stopienStudiow") == null)
             return "redirect:/kandydat/defwniosku/danepersonalne";
 

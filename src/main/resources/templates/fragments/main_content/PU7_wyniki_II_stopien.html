@@ -1,38 +1,87 @@
-<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="content_title">
-        <p>Oblicz swój wskaźnik rekrutacyjny!</p>
-    </div>
-    <div class="content_container">
-        <div class="content">
-            <form action="/gosc/obliczwskaznik/II/wyniki" method="post" th:object="${viewModel}">
-                <div class="form-group">
-                    <label for="ocenaNaDyplomie">Ocena na dyplomie</label>
-                    <input type="number" class="form-control" id="ocenaNaDyplomie" name="ocenaNaDyplomie" th:field="*{ocenaNaDyplomie}" step="0.5" min="2.0" max="5.5" pattern="\d+(\.\d{1,2})?" />
-                </div>
+<!--<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--    <div class="content_title">-->
+<!--        <p>Oblicz swój wskaźnik rekrutacyjny!</p>-->
+<!--    </div>-->
+<!--    <div class="content_container">-->
+<!--        <div class="content">-->
+<!--            <form action="/gosc/obliczwskaznik/II/wyniki" method="post" th:object="${viewModel}">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="ocenaNaDyplomie">Ocena na dyplomie</label>-->
+<!--                    <input type="number" class="form-control" id="ocenaNaDyplomie" name="ocenaNaDyplomie" th:field="*{ocenaNaDyplomie}" step="0.5" min="2.0" max="5.5" pattern="\d+(\.\d{1,2})?" />-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label for="sredniaZeStudiow">Średnia ze studiów</label>
-                    <input type="number" class="form-control" id="sredniaZeStudiow" name="sredniaZeStudiow" th:field="*{sredniaZeStudiow}" step="0.01" min="2.0" max="5.5" pattern="\d+(\.\d{1,2})?" />
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="sredniaZeStudiow">Średnia ze studiów</label>-->
+<!--                    <input type="number" class="form-control" id="sredniaZeStudiow" name="sredniaZeStudiow" th:field="*{sredniaZeStudiow}" step="0.01" min="2.0" max="5.5" pattern="\d+(\.\d{1,2})?" />-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label for="wynikEgzaminu">Wynik egzaminu</label>
-                    <input type="number" class="form-control" id="wynikEgzaminu" name="wynikEgzaminu" th:field="*{wynikEgzaminu}" pattern="\d+(\.\d{1,2})?" />
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="wynikEgzaminu">Wynik egzaminu</label>-->
+<!--                    <input type="number" class="form-control" id="wynikEgzaminu" name="wynikEgzaminu" th:field="*{wynikEgzaminu}" pattern="\d+(\.\d{1,2})?" />-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label for="przelicznikStudiowInzynierskich">Przelicznik studiów inżynierskich</label>
-                    <input type="number" class="form-control" id="przelicznikStudiowInzynierskich" name="przelicznikStudiowInzynierskich" th:field="*{przelicznikStudiowInzynierskich}" pattern="\d+(\.\d{1,2})?" />
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="przelicznikStudiowInzynierskich">Przelicznik studiów inżynierskich</label>-->
+<!--                    <input type="number" class="form-control" id="przelicznikStudiowInzynierskich" name="przelicznikStudiowInzynierskich" th:field="*{przelicznikStudiowInzynierskich}" pattern="\d+(\.\d{1,2})?" />-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Oblicz</button>
+<!--                <div class="form-group">-->
+<!--                    <button type="submit" class="btn btn-primary">Oblicz</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--            <h2>Wskaźnik rekrutacyjny: </h2>-->
+<!--            <span>-->
+<!--                <h2 th:text="${wskaznik} != null ? ${wskaznik} : ''"></h2>-->
+<!--            </span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="content_title" xmlns:th="http://www.w3.org/1999/xhtml">
+    <p>Oblicz swój wskaźnik rekrutacyjny!</p>
+</div>
+<div class="centered-content">
+    <div class="form-body centered-content">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <form action="/gosc/obliczwskaznik/II/wyniki" method="post" th:object="${viewModel}">
+                            <div class="form-group">
+                                <label for="ocenaNaDyplomie">Ocena na dyplomie</label>
+                                <input type="number" class="form-control" id="ocenaNaDyplomie" name="ocenaNaDyplomie" th:field="*{ocenaNaDyplomie}" step="0.5" min="2.0" max="5.5" pattern="\d+(\.\d{1,2})?" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sredniaZeStudiow">Średnia ze studiów</label>
+                                <input type="number" class="form-control" id="sredniaZeStudiow" name="sredniaZeStudiow" th:field="*{sredniaZeStudiow}" step="0.01" min="2.0" max="5.5" pattern="\d+(\.\d{1,2})?" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="wynikEgzaminu">Wynik egzaminu</label>
+                                <input type="number" class="form-control" id="wynikEgzaminu" name="wynikEgzaminu" th:field="*{wynikEgzaminu}" pattern="\d+(\.\d{1,2})?" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="przelicznikStudiowInzynierskich">Przelicznik studiów inżynierskich</label>
+                                <input type="number" class="form-control" id="przelicznikStudiowInzynierskich" name="przelicznikStudiowInzynierskich" th:field="*{przelicznikStudiowInzynierskich}" pattern="\d+(\.\d{1,2})?" />
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Oblicz</button>
+                            </div>
+                        </form>
+                        <h2>Wskaźnik rekrutacyjny: </h2>
+                        <span>
+                                <h2 th:text="${wskaznik} != null ? ${wskaznik} : ''"></h2>
+                            </span>
+
+                        <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
+                            <a th:href="@{/gosc/obliczwskaznik}" class="btn btn-dark">Wstecz</a>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            <h2>Wskaźnik rekrutacyjny: </h2>
-            <span>
-                <h2 th:text="${wskaznik} != null ? ${wskaznik} : ''"></h2>
-            </span>
+            </div>
         </div>
     </div>
 </div>
