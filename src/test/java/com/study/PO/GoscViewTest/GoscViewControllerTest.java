@@ -56,6 +56,8 @@ public class GoscViewControllerTest {
         verify(kierunekService, times(1)).getKierunek(id);
     }
 
+    //Test dla kontrolera GoscViewController sprawdzający, czy po wysłaniu poprawnego żądania POST na adres /gosc/obliczwskaznik
+    //zostanie wykonane przekierowanie do edresu /gosc/obliczwskaznik/II/wyniki
     @Test
     void testPostPU7WyborStopniaRedirectToMagisterskie() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/gosc/obliczwskaznik")
@@ -64,6 +66,10 @@ public class GoscViewControllerTest {
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/gosc/obliczwskaznik/II/wyniki"));
     }
 
+    //Test dla kontrolera GoscViewController sprawdzający, czy po wysłaniu poprawnego żądania POST na adres /gosc/obliczwskaznik/II/wyniki
+    //z przygotowanym obiektem klasy PU7wynikiMagisterskieViewModel z wypełnionymi polami, zostanie wyświetlony widok określony w pliku
+    //gosc/PU7_wyniki_II_stopien z istniejącym atybutem Modelu "wskaznik", którego wartość będzie zgodna z wartością wyliczoną jawnie
+    //podczas przygotowywania danych testowych.
     @Test
     void testPU7ObliczanieWskaznikaMagisterskie() throws Exception {
         // Prepare a sample PU7wynikiMagisterskieViewModel

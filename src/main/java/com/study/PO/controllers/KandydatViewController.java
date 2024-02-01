@@ -42,7 +42,7 @@ public class KandydatViewController {
     }
 
     @GetMapping("/kandydat/defwniosku/danepersonalne")
-    public String getPU5DanePersonalne() {
+    public String getPU5DanePersonalne(DanePersonalne danePersonalne) {
         return "kandydat/PU5_dane_personalne";
     }
 

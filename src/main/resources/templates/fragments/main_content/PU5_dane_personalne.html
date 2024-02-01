@@ -15,13 +15,13 @@
                     <div class="form-holder">
                         <div class="form-content">
                             <div class="form-items">
-                                <label for="imie">Imię:</label>
-                                <input type="text" id="imie" th:field="*{imie}" />
+                                <label class="required-field" for="imie">Imię:</label>
+                                <input type="text" id="imie" class="required-field" th:field="*{imie}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('imie')}" th:text="${err}" class="error" />
                                 </ul>
 
-                                <label for="nazwisko">Nazwisko:</label>
+                                <label class="required-field" for="nazwisko">Nazwisko:</label>
                                 <input type="text" id="nazwisko" th:field="*{nazwisko}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('nazwisko')}" th:text="${err}" class="error" />
@@ -29,7 +29,7 @@
 
                                 <label for="krajUr">Kraj urodzenia:</label>
                                 <div class="col-md-12">
-                                    <select id="krajUr" name="krajUr" class="form-select mt-3" required>
+                                    <select id="krajUr" name="krajUr" required>
                                         <option th:each="kraj : ${T(com.study.PO.entities.wniosek.dane.Kraj).values()}" th:value="${kraj}" th:text="${kraj.name()}">
                                     </select>
                                     <ul>
@@ -37,7 +37,7 @@
                                     </ul>
                                 </div>
 
-                                <label for="email">Email:</label>
+                                <label class="required-field" for="email">Email:</label>
                                 <input type="text" id="email" th:field="*{email}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('email')}" th:text="${err}" class="error" />
@@ -45,9 +45,11 @@
 
                                 <label for="dataUr">Data urodzenia:</label>
                                 <input type="date" id="dataUr" th:field="*{dataUr}" />
-                                <span th:if="${#fields.hasErrors('dataUr')}" th:errors="*{dataUr}"></span>
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('dataUr')}" th:text="${err}" class="error" />
+                                </ul>
 
-                                <label for="miejscUr">Miejsce urodzenia:</label>
+                                <label class="required-field" for="miejscUr">Miejsce urodzenia:</label>
                                 <input type="text" id="miejscUr" th:field="*{miejscUr}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('miejscUr')}" th:text="${err}" class="error" />
@@ -65,19 +67,19 @@
                                     <li th:each="err : ${#fields.errors('imieOjca')}" th:text="${err}" class="error" />
                                 </ul>
 
-                                <label for="numerTel">Numer telefonu:</label>
+                                <label class="required-field" for="numerTel">Numer telefonu:</label>
                                 <input type="text" id="numerTel" th:field="*{numerTel}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('numerTel')}" th:text="${err}" class="error" />
                                 </ul>
 
-                                <label for="obywatelstwo">Obywatelstwo:</label>
+                                <label class="required-field" for="obywatelstwo">Obywatelstwo:</label>
                                 <input type="text" id="obywatelstwo" th:field="*{obywatelstwo}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('obywatelstwo')}" th:text="${err}" class="error" />
                                 </ul>
 
-                                <label for="pesel">PESEL:</label>
+                                <label class="required-field" for="pesel">PESEL:</label>
                                 <input type="text" id="pesel" th:field="*{pesel}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('pesel')}" th:text="${err}" class="error" />
@@ -106,19 +108,19 @@
                                     </ul>
                                 </div>
 
-                                <label for="miejscZam">Miejsce zamieszkania:</label>
+                                <label class="required-field" for="miejscZam">Miejsce zamieszkania:</label>
                                 <input type="text" id="miejscZam" th:field="*{miejscZam}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('miejscZam')}" th:text="${err}" class="error" />
                                 </ul>
 
-                                <label for="ulica">Ulica:</label>
+                                <label class="required-field" for="ulica">Ulica:</label>
                                 <input type="text" id="ulica" th:field="*{ulica}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('ulica')}" th:text="${err}" class="error" />
                                 </ul>
 
-                                <label for="numerDomu">Numer domu:</label>
+                                <label class="required-field" for="numerDomu">Numer domu:</label>
                                 <input type="text" id="numerDomu" th:field="*{numerDomu}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('numerDomu')}" th:text="${err}" class="error" />
@@ -130,7 +132,7 @@
                                     <li th:each="err : ${#fields.errors('numerMieszk')}" th:text="${err}" class="error" />
                                 </ul>
 
-                                <label for="kodPocztowy">Kod pocztowy:</label>
+                                <label class="required-field" for="kodPocztowy">Kod pocztowy:</label>
                                 <input type="text" id="kodPocztowy" th:field="*{kodPocztowy}" />
                                 <ul>
                                     <li th:each="err : ${#fields.errors('kodPocztowy')}" th:text="${err}" class="error" />

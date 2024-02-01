@@ -14,7 +14,7 @@
                                 <li th:each="err : ${#fields.errors('DataUkSzkSr')}" th:text="${err}" class="error" />
                             </ul>
 
-                            <label for="NrSwiadDojrz">Numer świadectwa dojrzałości:</label>
+                            <label class="required-field" for="NrSwiadDojrz">Numer świadectwa dojrzałości:</label>
                             <input type="text" id="NrSwiadDojrz" th:field="*{NrSwiadDojrz}" />
                             <ul>
                                 <li th:each="err : ${#fields.errors('NrSwiadDojrz')}" th:text="${err}" class="error" />
@@ -26,7 +26,7 @@
                                 <li th:each="err : ${#fields.errors('DataWystSwiadDojrz')}" th:text="${err}" class="error" />
                             </ul>
 
-                            <label for="UczelniaUkonczSzkSr">Ukończona szkoła średnia:</label>
+                            <label class="required-field" for="UczelniaUkonczSzkSr">Ukończona szkoła średnia:</label>
                             <input type="text" id="UczelniaUkonczSzkSr" th:field="*{UczelniaUkonczSzkSr}" />
                             <ul>
                                 <li th:each="err : ${#fields.errors('UczelniaUkonczSzkSr')}" th:text="${err}" class="error" />
@@ -45,13 +45,13 @@
                                 <li th:each="err : ${#fields.errors('dataUkStud_I_Stop')}" th:text="${err}" class="error" />
                             </ul>
 
-                            <label for="KierunekUkonczStud_I_Stop">Kierunek ukończenia studiów I stopnia:</label>
+                            <label class="required-field" for="KierunekUkonczStud_I_Stop">Kierunek ukończenia studiów I stopnia:</label>
                             <input type="text" id="KierunekUkonczStud_I_Stop" th:field="*{KierunekUkonczStud_I_Stop}" />
                             <ul>
                                 <li th:each="err : ${#fields.errors('KierunekUkonczStud_I_Stop')}" th:text="${err}" class="error" />
                             </ul>
 
-                            <label for="UczelniaUkonczStud_I_Stop">Uczelnia ukończenia studiów I stopnia:</label>
+                            <label class="required-field" for="UczelniaUkonczStud_I_Stop">Uczelnia ukończenia studiów I stopnia:</label>
                             <input type="text" id="UczelniaUkonczStud_I_Stop" th:field="*{UczelniaUkonczStud_I_Stop}" />
                             <ul>
                                 <li th:each="err : ${#fields.errors('UczelniaUkonczStud_I_Stop')}" th:text="${err}" class="error" />
@@ -70,13 +70,13 @@
                                 <li th:each="err : ${#fields.errors('dataUkStud_II_Stop')}" th:text="${err}" class="error" />
                             </ul>
 
-                            <label for="KierunekUkonczStud_II_Stop">Kierunek ukończenia studiów II stopnia:</label>
+                            <label class="required-field" for="KierunekUkonczStud_II_Stop">Kierunek ukończenia studiów II stopnia:</label>
                             <input type="text" id="KierunekUkonczStud_II_Stop" th:field="*{KierunekUkonczStud_II_Stop}" />
                             <ul>
                                 <li th:each="err : ${#fields.errors('KierunekUkonczStud_II_Stop')}" th:text="${err}" class="error" />
                             </ul>
 
-                            <label for="UczelniaUkonczStud_II_Stop">Uczelnia ukończenia studiów II stopnia:</label>
+                            <label class="required-field" for="UczelniaUkonczStud_II_Stop">Uczelnia ukończenia studiów II stopnia:</label>
                             <input type="text" id="UczelniaUkonczStud_II_Stop" th:field="*{UczelniaUkonczStud_II_Stop}" />
                             <ul>
                                 <li th:each="err : ${#fields.errors('UczelniaUkonczStud_II_Stop')}" th:text="${err}" class="error" />

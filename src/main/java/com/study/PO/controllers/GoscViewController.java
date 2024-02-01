@@ -178,6 +178,11 @@ public class GoscViewController {
                 Map<String, Double> wyniki1 = viewModel.getWynikiPodstawa();
                 Map<String, Double> wyniki2 = viewModel.getWynikiRozszerzenie();
                 double wynik = przelicznik.przeliczKryterium(new Wyniki(wyniki1, wyniki2));
+                double maxWynik = 535.0;
+                if (nazwaKierunku.equalsIgnoreCase("Architektura"))
+                    maxWynik = 1195.0;
+                if (nazwaKierunku.equalsIgnoreCase("Lekarski"))
+                    maxWynik = 785.0;
                 if (viewModel.isCzyStudiumTalentFizyka() || viewModel.isCzyStudiumTalentMatematyka()){
                     double stFizyka = 0;
                     double stMatematyka = 0;
@@ -187,13 +192,13 @@ public class GoscViewController {
                         stMatematyka = viewModel.getWynikStudiumTalentMatematyka();
                     double studium = Math.max(stFizyka, stMatematyka);
                     if (studium >= 3.0 && studium < 4.0)
-                        wynik = Math.max(535.0, wynik + 30.0);
+                        wynik = Math.min(maxWynik, wynik + 30.0);
                     else {
                         if (studium >= 4.0 && studium < 5.0)
-                            wynik = Math.max(535.0, wynik + 40.0);
+                            wynik = Math.min(maxWynik, wynik + 40.0);
                         else {
                             if (studium >= 5.0)
-                                wynik = 535.0;
+                                wynik = maxWynik;
                         }
                     }
                 }
