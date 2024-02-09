@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kierunki</title>
+    <style>
+        .container {
+            max-width: 100%; /* Flexible to the parent container */
+            background-color: #5D3A7A;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        thead {
+            background-color: #6E4C9F;
+        }
+
+        th, td {
+            padding: 0.5rem;
+            border: 1px solid #DDD;
+            text-align: left;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #6E4C9F;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #5D3A7A;
+        }
+
+        button {
+            background-color: #8A5FA5;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #A07AB1;
+        }
+
+        /* Additional styling for script tag */
+        script {
+            display: none;
+        }
+        form {
+            display: inline-block;
+            margin-right: 10px;
+  }
+  input[type=submit] {
+            background-color: #8A5FA5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Kierunek</th>
+                    <th>Stopień</th>
+                    <th>Akcja</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="kierunek : ${kierunki}">
+                    <td th:text="${kierunek.id}"></td>
+                    <td th:text="${kierunek.nazwa}"></td>
+                    <td th:text="${kierunek.stopienStudiow}"></td>
+                    <td>
+                        <form th:id="'form_' + ${kierunek.id}" method="get">
+                            <button type="button" th:onclick="'submitForm(' + ${kierunek.id} + ')'">Przeglądaj</button>
+                        </form>
+                    </td>
+                </tr>
+                
+                
+            </tbody>
+            <script src="/js/submitFormPrzegladajKierunek.js"></script>
+
+        </table>
+        <form th:action="@{/gosc/przegladKierunki}" method="get">
+            <input type="submit" value="Wstecz">
+        </form>
+    </div>
+    
+</body>
+</html>

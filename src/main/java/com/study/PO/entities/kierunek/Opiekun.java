@@ -1,12 +1,15 @@
 package com.study.PO.entities.kierunek;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "opiekunowie")
@@ -28,4 +31,7 @@ public class Opiekun {
     @NotBlank(message = "Nazwisko jest wymagane")
     @Size(max = 128, message = "Nazwisko nie może przekraczać 128 znaków")
     private String nazwisko;
+
+    @OneToMany(mappedBy = "opiekun", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Kierunek> kierunek;
 }

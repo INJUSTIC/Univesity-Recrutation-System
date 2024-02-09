@@ -15,9 +15,7 @@ import com.study.PO.services.KierunekService;
 import com.study.PO.services.WniosekService;
 import com.study.PO.services.WydzialService;
 import jakarta.validation.Valid;
-import org.attoparser.dom.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -39,19 +37,13 @@ import java.util.List;
 public class DzialRekrutacjiController {
     private final WniosekService wniosekService;
     private final DokumentService dokumentService;
-    private final KierunekService kierunekService;
-
-    private final WydzialService wydzialService;
-
     private final ResourceLoader resourceLoader;
 
     @Autowired
-    public DzialRekrutacjiController(WniosekService wniosekService, DokumentService dokumentService, KierunekService kierunekService, WydzialService wydzialService, ResourceLoader resourceLoader) {
+    public DzialRekrutacjiController(WniosekService wniosekService, DokumentService dokumentService, ResourceLoader resourceLoader) {
         this.wniosekService = wniosekService;
         this.dokumentService = dokumentService;
         this.resourceLoader = resourceLoader;
-        this.kierunekService = kierunekService;
-        this.wydzialService = wydzialService;
     }
 
     @GetMapping("/")
@@ -117,7 +109,8 @@ public class DzialRekrutacjiController {
 
     @GetMapping("/przeprowadzenieRekrutacji/wnioski/{wniosekId}/dokumenty/{dokumentId}/pobierz")
     public ResponseEntity<InputStreamResource> pobierzDokument(@PathVariable long dokumentId) throws IOException {
-        String documentName = dokumentService.getDokument(dokumentId).getNazwaDokumentu();
+        Dokument document = dokumentService.getDokument(dokumentId);
+        String documentName = document.getNazwaDokumentu();
         Resource documentResource = resourceLoader.getResource("classpath:plikiDokumentow/" + documentName);
         InputStream documentStream = documentResource.getInputStream();
 
@@ -127,44 +120,11 @@ public class DzialRekrutacjiController {
         // Set the content type based on the document type
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE);
 
-        return ResponseEntity
+        ResponseEntity result = ResponseEntity
                 .ok()
                 .headers(headers)
                 .body(new InputStreamResource(documentStream));
-    }
-
-    @GetMapping("zarzadzanieWydzialami")
-    public String getWydzialy(Model model) {
-        List<Wydzial> wydzialy = wydzialService.getAllWydzial();
-        model.addAttribute("wydzialy", wydzialy);
-        return "dzialRekrutacji/showAll";
-    }
-
-    @GetMapping("zarzadzanieWydzialami/{wydzialId}")
-    public String getWydzial(Model model, @PathVariable long wydzialId) {
-        Wydzial wydzial = wydzialService.getWydzial(wydzialId);
-        model.addAttribute("wydzial", wydzial);
-        return "dzialRekrutacji/showWydzial";
-    }
-
-    @GetMapping("zarzadzanieWydzialami/{wydzialId}/dodawanieKierunku")
-    public String showFormularzDodawanieKierunku(Model model, @PathVariable long wydzialId) {
-        Kierunek kierunek = new Kierunek();
-        model.addAttribute("kierunek", kierunek);
-        model.addAttribute("wydzialId", wydzialId);
-        return "dzialRekrutacji/addKierunekForm";
-    }
-
-    @PostMapping("zarzadzanieWydzialami/{wydzialId}/dodawanieKierunku")
-    public String dodawanieKierunku(Model model, @Valid @ModelAttribute("kierunek") Kierunek kierunek, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("kierunek", kierunek);
-            return "dzialRekrutacji/addKierunekForm";
-        }
-        else {
-            kierunekService.addKierunek(kierunek);
-        }
-        return "redirect:/zarzadzanieWydzialami";
+        return result;
     }
 
    private List<DaneIdentWniosek> getDaneIdentWniosek(List<Wniosek> wnioski) {

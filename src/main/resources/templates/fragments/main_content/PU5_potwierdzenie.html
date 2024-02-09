@@ -1,0 +1,26 @@
+<div class="content_title" xmlns:th="http://www.w3.org/1999/xhtml">
+    <p>Potwierdzenie</p>
+</div>
+<div class="centered-content">
+    <div class="form-body centered-content">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Czy system ma przyjąć wniosek do rozpatrzenia?</h3>
+                        <h3>UWAGA! Tej decyzji nie można cofnąć!</h3>
+                        <form action="/kandydat/defwniosku/potwierdzenie" method="post" class="requires-validation" novalidate>
+                            <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
+                                <a th:href="@{/kandydat/}" class="btn btn-dark">NIE</a>
+                                <button id="submit" type="submit" class="btn btn-info">TAK</button>
+                            </div>
+                        </form>
+                        <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
+                            <a th:href="@{/kandydat/defwniosku/dolaczaniedokumentow}" class="btn btn-dark">Wstecz</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="content_title" xmlns:th="http://www.w3.org/1999/xhtml">
+    <p>Dane personalne</p>
+</div>
+<div class="centered-content" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="form-body centered-content">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div th:if="${stopienStudiow == 1}" class="form-items">
+                        <form action="/kandydat/defwniosku/danedodatkowe/inz" method="post" th:object="${daneDodatkowe}" class="requires-validation" novalidate>
+                            <label for="DataUkSzkSr">Data ukończenia szkoły średniej:</label>
+                            <input type="date" id="DataUkSzkSr" th:field="*{DataUkSzkSr}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('DataUkSzkSr')}" th:text="${err}" class="error" />
+                            </ul>
+
+                            <label class="required-field" for="NrSwiadDojrz">Numer świadectwa dojrzałości:</label>
+                            <input type="text" id="NrSwiadDojrz" th:field="*{NrSwiadDojrz}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('NrSwiadDojrz')}" th:text="${err}" class="error" />
+                            </ul>
+
+                            <label for="DataUkSzkSr">Data wystawienia świadectwa dojrzałości:</label>
+                            <input type="date" id="DataWystSwiadDojrz" th:field="*{DataWystSwiadDojrz}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('DataWystSwiadDojrz')}" th:text="${err}" class="error" />
+                            </ul>
+
+                            <label class="required-field" for="UczelniaUkonczSzkSr">Ukończona szkoła średnia:</label>
+                            <input type="text" id="UczelniaUkonczSzkSr" th:field="*{UczelniaUkonczSzkSr}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('UczelniaUkonczSzkSr')}" th:text="${err}" class="error" />
+                            </ul>
+                            <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
+                                <a th:href="@{/kandydat/defwniosku/wyborkierunku}" class="btn btn-dark">Wstecz</a>
+                                <button id="submit1" type="submit" class="btn btn-info">Dalej</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div th:if="${stopienStudiow == 2}" class="form-items">
+                        <form action="/kandydat/defwniosku/danedodatkowe/mag" method="post" th:object="${daneDodatkowe}" class="requires-validation" novalidate>
+                            <label for="dataUkStud_I_Stop">Data ukończenia studiów I stopnia:</label>
+                            <input type="date" id="dataUkStud_I_Stop" th:field="*{dataUkStud_I_Stop}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('dataUkStud_I_Stop')}" th:text="${err}" class="error" />
+                            </ul>
+
+                            <label class="required-field" for="KierunekUkonczStud_I_Stop">Kierunek ukończenia studiów I stopnia:</label>
+                            <input type="text" id="KierunekUkonczStud_I_Stop" th:field="*{KierunekUkonczStud_I_Stop}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('KierunekUkonczStud_I_Stop')}" th:text="${err}" class="error" />
+                            </ul>
+
+                            <label class="required-field" for="UczelniaUkonczStud_I_Stop">Uczelnia ukończenia studiów I stopnia:</label>
+                            <input type="text" id="UczelniaUkonczStud_I_Stop" th:field="*{UczelniaUkonczStud_I_Stop}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('UczelniaUkonczStud_I_Stop')}" th:text="${err}" class="error" />
+                            </ul>
+                            <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
+                                <a th:href="@{/kandydat/defwniosku/wyborkierunku}" class="btn btn-dark">Wstecz</a>
+                                <button id="submit2" type="submit" class="btn btn-info">Dalej</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div th:if="${stopienStudiow == 3}" class="form-items">
+                        <form action="/kandydat/defwniosku/danedodatkowe/dok" method="post" th:object="${daneDodatkowe}" class="requires-validation" novalidate>
+                            <label for="dataUkStud_II_Stop">Data ukończenia studiów II stopnia:</label>
+                            <input type="date" id="dataUkStud_II_Stop" th:field="*{dataUkStud_II_Stop}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('dataUkStud_II_Stop')}" th:text="${err}" class="error" />
+                            </ul>
+
+                            <label class="required-field" for="KierunekUkonczStud_II_Stop">Kierunek ukończenia studiów II stopnia:</label>
+                            <input type="text" id="KierunekUkonczStud_II_Stop" th:field="*{KierunekUkonczStud_II_Stop}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('KierunekUkonczStud_II_Stop')}" th:text="${err}" class="error" />
+                            </ul>
+
+                            <label class="required-field" for="UczelniaUkonczStud_II_Stop">Uczelnia ukończenia studiów II stopnia:</label>
+                            <input type="text" id="UczelniaUkonczStud_II_Stop" th:field="*{UczelniaUkonczStud_II_Stop}" />
+                            <ul>
+                                <li th:each="err : ${#fields.errors('UczelniaUkonczStud_II_Stop')}" th:text="${err}" class="error" />
+                            </ul>
+                            <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
+                                <a th:href="@{/kandydat/defwniosku/wyborkierunku}" class="btn btn-dark">Wstecz</a>
+                                <button id="submit3" type="submit" class="btn btn-info">Dalej</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.requires-validation')
+        Array.from(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+
+              form.classList.add('was-validated')
+            }, false)
+      })
+    })()
+
+    $(document).ready(function () {
+        // Use Bootstrap datepicker or any other date picker library
+        $('#DataUkSzkSr').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true,
+            // Add any additional options or customizations here
+        });
+    });
+</script>

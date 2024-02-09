@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
 .content_gradient {
     width: 100%;
-    min-height: 100vh; /* Ensure the background covers at least the site height */
+    min-height: 90vh; /* Ensure the background covers at least the site height */
     background: linear-gradient(160deg, rgba(58, 4, 46, 0.9), rgba(34, 19, 96, 0.9) 40%, rgba(137, 52, 138, 0.9) 60%, rgba(38, 2, 36, 0.9));
     display: flex;
     flex-direction: column;
@@ -11,16 +13,15 @@
 
 .content_title {
     margin-left: 10vw;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    style="font-family: 'Poppins', sans-serif;"
     letter-spacing: 2px;
     font-size: 40px;
     color: #fff;
-    padding-top: 20px;
-    padding-left: 0px;
+    padding-top: 40px;
+    padding-left: 10px;
 }
 
 .content_container {
-    flex: 1; /* Take up remaining vertical space */
     width: 80vw;
     display: flex;
     align-items: center;
@@ -37,4 +38,53 @@
     padding: 20px;
     width: 100%; /* Ensure the content takes full width */
     font-size: 20px;
+}
+
+.my_content {
+    background-color: rgba(242, 240, 241, 0.4);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%; /* Ensure the content takes full width */
+    font-size: 20px;
+}
+
+.content_centered {
+    background-color: rgba(242, 240, 241, 0.4);
+    border-radius: 15px;
+    padding: 30px;
+    width: 40%;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.content_centered select option{
+    font-size: 30px;
+}
+
+.button_next {
+	background-color:#8cc99a;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:28px;
+	font-weight:bold;
+	padding:15px 60px;
+	text-decoration:none;
+}
+.button_next:hover {
+	background-color:#4b7038;
+}
+.button_next:active {
+	position:relative;
+	top:1px;
+}
+
+.centered-content{
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    display: flex;
+    margin: 0;
 }

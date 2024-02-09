@@ -1,0 +1,183 @@
+<style>
+    .error {
+        color: #cc404e;
+        font-size: 18px;
+    }
+</style>
+<div class="content_title" xmlns:th="http://www.w3.org/1999/xhtml">
+    <p>Dane personalne</p>
+</div>
+<div class="centered-content" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="form-body centered-content">
+        <form action="#" th:action="@{/kandydat/defwniosku/danepersonalne}" th:object="${danePersonalne}" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-holder">
+                        <div class="form-content">
+                            <div class="form-items">
+                                <label class="required-field" for="imie">Imię:</label>
+                                <input type="text" id="imie" class="required-field" th:field="*{imie}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('imie')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label class="required-field" for="nazwisko">Nazwisko:</label>
+                                <input type="text" id="nazwisko" th:field="*{nazwisko}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('nazwisko')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label for="krajUr">Kraj urodzenia:</label>
+                                <div class="col-md-12">
+                                    <select id="krajUr" name="krajUr" required>
+                                        <option th:each="kraj : ${T(com.study.PO.entities.wniosek.dane.Kraj).values()}" th:value="${kraj}" th:text="${kraj.name()}">
+                                    </select>
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('krajUr')}" th:text="${err}" class="error" />
+                                    </ul>
+                                </div>
+
+                                <label class="required-field" for="email">Email:</label>
+                                <input type="text" id="email" th:field="*{email}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('email')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label for="dataUr">Data urodzenia:</label>
+                                <input type="date" id="dataUr" th:field="*{dataUr}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('dataUr')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label class="required-field" for="miejscUr">Miejsce urodzenia:</label>
+                                <input type="text" id="miejscUr" th:field="*{miejscUr}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('miejscUr')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label for="imieMatki">Imię matki:</label>
+                                <input type="text" id="imieMatki" th:field="*{imieMatki}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('imieMatki')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label for="imieOjca">Imię ojca:</label>
+                                <input type="text" id="imieOjca" th:field="*{imieOjca}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('imieOjca')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label class="required-field" for="numerTel">Numer telefonu:</label>
+                                <input type="text" id="numerTel" th:field="*{numerTel}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('numerTel')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label class="required-field" for="obywatelstwo">Obywatelstwo:</label>
+                                <input type="text" id="obywatelstwo" th:field="*{obywatelstwo}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('obywatelstwo')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label class="required-field" for="pesel">PESEL:</label>
+                                <input type="text" id="pesel" th:field="*{pesel}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('pesel')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label for="numerPaszp">Numer paszportu:</label>
+                                <input type="text" id="numerPaszp" th:field="*{numerPaszp}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('numerPaszp')}" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-holder">
+                        <div class="form-content">
+                            <div class="form-items">
+                                <label for="krajZam">Kraj zamieszkania:</label>
+                                <div class="col-md-12">
+                                    <select id="krajZam" name="krajZam" class="form-select mt-3" required>
+                                        <option th:each="kraj : ${T(com.study.PO.entities.wniosek.dane.Kraj).values()}" th:value="${kraj}" th:text="${kraj.name()}">
+                                    </select>
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('krajZam')}" th:text="${err}" class="error" />
+                                    </ul>
+                                </div>
+
+                                <label class="required-field" for="miejscZam">Miejsce zamieszkania:</label>
+                                <input type="text" id="miejscZam" th:field="*{miejscZam}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('miejscZam')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label class="required-field" for="ulica">Ulica:</label>
+                                <input type="text" id="ulica" th:field="*{ulica}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('ulica')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label class="required-field" for="numerDomu">Numer domu:</label>
+                                <input type="text" id="numerDomu" th:field="*{numerDomu}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('numerDomu')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label for="numerMieszk">Numer mieszkania:</label>
+                                <input type="text" id="numerMieszk" th:field="*{numerMieszk}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('numerMieszk')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label class="required-field" for="kodPocztowy">Kod pocztowy:</label>
+                                <input type="text" id="kodPocztowy" th:field="*{kodPocztowy}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('kodPocztowy')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label for="powiat">Powiat:</label>
+                                <input type="text" id="powiat" th:field="*{powiat}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('powiat')}" th:text="${err}" class="error" />
+                                </ul>
+
+                                <label for="wojewodz">Województwo:</label>
+                                <input type="text" id="wojewodz" th:field="*{wojewodz}" />
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('wojewodz')}" th:text="${err}" class="error" />
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-buttons mt-3 pt-2 d-flex justify-content-center">
+                <button id="submit" type="submit" class="btn btn-info" style="margin-bottom: 20px;">Dalej</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--<script>-->
+<!--    function goBack() {-->
+<!--        window.history.back();-->
+<!--    }-->
+<!--    (function () {-->
+<!--        'use strict'-->
+<!--        const forms = document.querySelectorAll('.requires-validation')-->
+<!--        Array.from(forms)-->
+<!--          .forEach(function (form) {-->
+<!--            form.addEventListener('submit', function (event) {-->
+<!--              if (!form.checkValidity()) {-->
+<!--                event.preventDefault()-->
+<!--                event.stopPropagation()-->
+<!--              }-->
+
+<!--              form.classList.add('was-validated')-->
+<!--            }, false)-->
+<!--      })-->
+<!--    })()-->
+<!--</script>-->

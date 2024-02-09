@@ -1,0 +1,63 @@
+<div class="content_title">
+    <p>Oblicz swój wskaźnik rekrutacyjny!</p>
+</div>
+<div class="centered-content" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="form-body centered-content">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <form action="/gosc/obliczwskaznik/egzaminy" method="post" th:object="${viewModel}" class="requires-validation" novalidate>
+                            <h5 style="color: #484848; text-align: left; font-size: 22px; font-weight: 400; line-height: 20px; margin-bottom: 5px; margin-top: 10px;">Wybierz egzaminy - poziom podstawowy</h5>
+                            <div class="col-md-12">
+                                <select class="selectpicker mt-3" th:field="*{nazwyEgzaminowPodstawa}" multiple required data-live-search="true">
+                                    <option th:each="item : ${nazwyEgzaminow}" th:value="${item}" th:text="${item}"></option>
+                                </select>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Proszę wybrać egzaminy!</div>
+                            </div>
+
+
+                            <h5 style="color: #484848; text-align: left; font-size: 22px; font-weight: 400; line-height: 20px; margin-bottom: 5px; margin-top: 10px;">Wybierz egzaminy - poziom rozszerzony</h5>
+                            <div class="col-md-12">
+                                <select class="selectpicker mt-3" th:field="*{nazwyEgzaminowRozszerzenie}" placeholder="Wybierz egzamin" multiple required data-live-search="true">
+                                    <option th:each="item : ${nazwyEgzaminow}" th:value="${item}" th:text="${item}"></option>
+                                </select>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Proszę wybrać egzaminy!</div>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" th:field="*{czyEgzaminRysunek}" value="">
+                                <label class="form-check-label">Egzamin z rysunku (opcjonalnie)</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" th:field="*{czyStudiumTalentMatematyka}" value="">
+                                <label class="form-check-label">Studium Talent - Matematyka (opcjonalnie)</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" th:field="*{czyStudiumTalentFizyka}" value="">
+                                <label class="form-check-label">Studium Talent - Fizyka (opcjonalnie)</label>
+                            </div>
+
+                            <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
+<!--                                <button id="back" type="button" class="btn btn-dark" onclick="goBack()">Wstecz</button>-->
+                                <a th:href="@{/gosc/obliczwskaznik/kryteria}" class="btn btn-dark">Wstecz</a>
+                                <button id="submit" type="submit" class="btn btn-info">Dalej</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+

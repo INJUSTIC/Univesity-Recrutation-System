@@ -1,6 +1,6 @@
 <style>
   .table-container {
-    max-height: 400px; /* Adjust the maximum height as needed */
+    max-height: 500px; /* Adjust the maximum height as needed */
     overflow-y: auto;
   }
 
@@ -13,22 +13,30 @@
   th, td {
     padding: 10px;
     text-align: left;
+    color: white;
   }
 
   th {
     background-color: rgba(242, 240, 241, 0.4);
   }
 
-  .back-button {
-    margin-top: 20px;
-    width: auto;
-    display: block;
+  .btn-back {
+    position: absolute;
+    bottom: 80px;
+    left: 30px;
+    padding: 10px;
   }
 
-  /* Add a specific class to target the back button */
-  .back-button-specific {
-    display: inline-block;
-    /* Add any additional styles you need */
+  button {
+    background-color: #8A5FA5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block; /* Full width for mobile, adjust as needed */
+    width: auto; /* Adjust based on your layout requirements */
   }
 
 
@@ -89,7 +97,9 @@
     </table>
   </div>
 
-  <button class="back-button back-button-specific" th:text="Wstecz" onclick="goBack()">Wstecz</button>
+  <div class="btn-back">
+    <button th:text="Wstecz" onclick="goBack()">Wstecz</button>
+  </div>
 
 
   <script>

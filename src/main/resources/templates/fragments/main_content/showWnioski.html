@@ -1,6 +1,6 @@
 <style>
   .table-container {
-    max-height: 400px; /* Adjust the maximum height as needed */
+    max-height: 450px; /* Adjust the maximum height as needed */
     overflow-y: auto;
   }
 
@@ -13,22 +13,31 @@
   th, td {
     padding: 10px;
     text-align: left;
+    color: white;
   }
+
+  .btn-container-back {
+    position: absolute;
+    bottom: 80px;
+    left: 30px;
+    padding: 10px;
+  }
+
+  button {
+    background-color: #8A5FA5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block; /* Full width for mobile, adjust as needed */
+    width: auto; /* Adjust based on your layout requirements */
+  }
+
 
   th {
     background-color: rgba(242, 240, 241, 0.4);
-  }
-
-  .back-button {
-    margin-top: 20px;
-    width: auto;
-    display: block;
-  }
-
-  /* Add a specific class to target the back button */
-  .back-button-specific {
-    display: inline-block;
-    /* Add any additional styles you need */
   }
 
 
@@ -56,10 +65,98 @@
   .table-action a:hover:after {
     width: 100%;
   }
+
+  .filter-container {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .filter-input {
+    padding: 5px;
+    margin-right: 30px;
+    background-color: rgba(242, 240, 241, 0.4);
+    border: none;
+  }
+
+  .filter-input-container {
+    margin-right: 20px;
+  }
+
+  .filter-label {
+    margin-bottom: 5px;
+    color: white;
+  }
+
 </style>
 
+<script th:inline="javascript">
+  function filterWnioski() {
+    var params = new URLSearchParams();
+    var kierunek = document.getElementById('kierunek').value;
+    var status = document.getElementById('status').value;
+    var stopien = document.getElementById('stopien').value;
+    var wydzial = document.getElementById('wydzial').value;
+
+    if (kierunek) params.append('kierunek', kierunek);
+    if (status) params.append('statusWniosku', status);
+    if (stopien) params.append('stopienKierunku', stopien);
+    if (wydzial) params.append('wydzialNameOrCode', wydzial);
+
+    var redirectUrl = /*[[ @{/dzialRekrutacji/przeprowadzenieRekrutacji/wnioski} ]]*/ '';
+
+    if (params.toString()) {
+      redirectUrl += '?' + params.toString();
+    }
+
+    window.location.href = redirectUrl;
+  }
+
+  function capitalizeFirstLetter(inputElement) {
+    var inputValue = inputElement.value;
+
+    // Check if the input is not empty
+    if (inputValue.length > 0) {
+      // Capitalize the first letter and make the rest lowercase
+      var capitalizedText = inputValue.charAt(0).toUpperCase() + inputValue.slice(1).toLowerCase();
+      // Set the modified text back to the input field
+      inputElement.value = capitalizedText;
+    }
+  }
+</script>
+
 <div class="content_gradient">
+
+  <div class="filter-container">
+    <div class="filter-input-container">
+      <label class="filter-label">Nazwa kierunku</label>
+      <input id="kierunek" class="filter-input" type="text" oninput="capitalizeFirstLetter(this)">
+    </div>
+    <div class="filter-input-container">
+      <label class="filter-label">Status</label>
+      <select id="status" class="filter-input">
+        <option value="">-- Wybierz Status --</option>
+        <option th:each="status : ${T(com.study.PO.entities.wniosek.StatusWniosku).values()}" th:value="${status}" th:text="${status}"></option>
+      </select>
+    </div>
+    <div class="filter-input-container">
+      <label class="filter-label">Stopień</label>
+      <select id="stopien" class="filter-input">
+        <option value="">-- Wybierz Stopień --</option>
+        <option th:each="stopien : ${T(com.study.PO.entities.kierunek.StopienStudiow).values()}" th:value="${stopien}" th:text="${stopien}"></option>
+      </select>
+    </div>
+    <div class="filter-input-container">
+      <label class="filter-label">Wydział</label>
+      <input id="wydzial" class="filter-input" type="text" oninput="capitalizeFirstLetter(this)">
+    </div>
+
+    <button onclick="filterWnioski()">Filtruj</button>
+  </div>
+
   <div class="table-container">
+    <br><br><br>
     <table>
       <thead>
       <tr>
@@ -87,12 +184,12 @@
     </table>
   </div>
 
-  <button class="back-button back-button-specific" th:text="Wstecz" onclick="goBack()">Wstecz</button>
-
-
-  <script>
-    function goBack() {
-      window.history.back();
-    }
-  </script>
+  <div class="btn-container-back">
+    <button th:text="Wstecz" onclick="goBack()">Wstecz</button>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </div>
 </div>

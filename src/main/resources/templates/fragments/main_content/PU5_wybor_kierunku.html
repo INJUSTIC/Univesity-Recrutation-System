@@ -1,0 +1,31 @@
+<div class="content_title" xmlns:th="http://www.w3.org/1999/xhtml">
+    <p>Stopień studiów</p>
+</div>
+<div class="centered-content">
+    <div class="form-body centered-content">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Podaj kierunek studiów</h3>
+                        <form action="/kandydat/defwniosku/wyborkierunku" method="post" class="requires-validation" novalidate>
+
+                            <div class="col-md-12">
+                                <select id="nazwaKierunku" name="nazwaKierunku" class="form-select mt-3" required>
+                                    <option th:each="nazwa : ${nazwyKierunkow}" th:value="${nazwa}" th:text="${nazwa}" th:selected="${nazwa == kierunek}">
+                                </select>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Proszę wybrać nazwę kierunku!</div>
+                            </div>
+
+                            <div class="form-buttons mt-3 pt-2 d-flex justify-content-between">
+                                <a th:href="@{/kandydat/defwniosku/wyborstopnia}" class="btn btn-dark">Wstecz</a>
+                                <button id="submit" type="submit" class="btn btn-info">Dalej</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

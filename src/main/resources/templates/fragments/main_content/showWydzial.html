@@ -1,0 +1,126 @@
+<style>
+    table {
+        border-collapse: collapse;
+        width: 60%;
+        margin: 20px auto;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        color: white;
+    }
+    button {
+        background-color: #8A5FA5;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: block; /* Full width for mobile, adjust as needed */
+        width: auto; /* Adjust based on your layout requirements */
+    }
+    th {
+        background-color: rgba(242, 240, 241, 0.4);
+    }
+
+    .table-action a + a {
+        margin-left: 20px; /* Add margin-left to create horizontal spacing */
+    }
+    .table-action a {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+        position: relative; /* Add position: relative; to allow absolute positioning of :after */
+    }
+
+    .table-action a:after {
+        content: '';
+        height: 3px;
+        width: 0;
+        background: #E65728;
+        position: absolute;
+        left: 0;
+        bottom: -4px; /* Adjusted to be at the bottom of the anchor */
+        transition: width 0.5s; /* Adjusted to only transition the width property */
+    }
+
+    .table-action a:hover:after {
+        width: 100%;
+    }
+
+    .btn-container-back {
+        position: absolute;
+        bottom: 80px;
+        left: 50px;
+        padding: 10px;
+    }
+
+    .btn-container-dodaj-kierunek {
+        position: absolute;
+        bottom: 80px;
+        right: 50px;
+        padding: 10px;
+    }
+
+    .content_title_1 {
+        margin-left: 10vw;
+        style="font-family: 'Poppins', sans-serif;"
+        letter-spacing: 2px;
+        font-size: 40px;
+        color: #fff;
+        padding-top: 0px;
+        padding-left: 10px;
+    }
+</style>
+
+<div class="content_title_1" th:object="${wydzial}">
+    <p><span th:text="${wydzial.nazwa}"></span></p>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nazwa kierunku</th>
+        <th>Stopień</th>
+        <th>Opiekun</th>
+        <th>Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Example Thymeleaf loop for dynamic content -->
+    <tr th:each="row : ${wydzial.getKierunki()}">
+        <td th:text="${row.nazwa}"></td>
+        <td th:text="${row.stopienStudiow}"></td>
+        <td th:text="${row.opiekun.imie + ' ' + row.opiekun.nazwisko}"></td>
+        <td>
+            <span class="table-action">
+              <a th:text="Edytuj"></a>
+                <a th:text="Usuń"></a>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="btn-container-back">
+    <button th:text="Wstecz" onclick="goBack()">Wstecz</button>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
+
+<div class="btn-container-dodaj-kierunek">
+    <form th:object="${wydzial}" th:action="@{/DzialIT/zarzadzanieWydzialami/{wydzialId}/dodawanieKierunku(wydzialId=${wydzial.id})}" method="get">
+        <button type="submit">
+            Dodaj nowy kierunek
+        </button>
+    </form>
+</div>
+

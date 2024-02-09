@@ -1,0 +1,100 @@
+<!--<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--    <div class="content_title">-->
+<!--        <p>Oblicz swój wskaźnik rekrutacyjny!</p>-->
+<!--    </div>-->
+<!--    <div class="content_container">-->
+<!--        <div class="content_centered">-->
+<!--            <form action="/gosc/obliczwskaznik" method="post">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="stopienStudiow">Rodzaj studiów:</label>-->
+<!--                    <select id="stopienStudiow" name="stopienStudiow" class="selectpicker form-select-lg mb-3">-->
+<!--                        <option selected></option>-->
+<!--                        <option value=1>Inżynierskie</option>-->
+<!--                        <option value=2>Magisterskie</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <button type="submit" class="btn btn-primary btn-lg rounded-pill" style="background-color: #c8e6c9;">Dalej</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="content_title">
+    <p>Oblicz swój wskaźnik rekrutacyjny!</p>
+</div>
+<div class="centered-content">
+    <div class="form-body centered-content">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Podaj stopień studiów</h3>
+                        <form action="/gosc/obliczwskaznik" method="post" class="requires-validation" novalidate>
+
+                            <div class="col-md-12">
+                                <select id="stopienStudiow" name="stopienStudiow" class="form-select mt-3" required>
+                                    <option value=1>Inżynierskie</option>
+                                    <option value=2>Magisterskie</option>
+                                </select>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Proszę wybrać poziom studiów!</div>
+                            </div>
+
+
+                            <div class="form-button mt-3 pt-2 d-flex justify-content-end">
+                                <button id="submit" type="submit" class="btn btn-info">Dalej</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!--<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--    <div class="content_title">-->
+<!--        <p>Oblicz swój wskaźnik rekrutacyjny!</p>-->
+<!--    </div>-->
+<!--    <div class="content_container">-->
+<!--        <div class="content_centered">-->
+<!--            <form action="/gosc/obliczwskaznik" method="post" th:object="${PU7stopienStudiow}">-->
+<!--                <label for="stopienStudiow">Rodzaj studiów:</label>-->
+<!--                <select th:field="*{stopienStudiow}" id="stopienStudiow">-->
+<!--                    <option value="">-</option>-->
+<!--                    <option th:value="${1}">Inżynierskie</option>-->
+<!--                    <option th:value="${2}">Magisterskie</option>-->
+<!--                </select>-->
+
+<!--                <button type="submit" th:onclick="@{/gosc/wybierzkryterium}">Dalej</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="content_gradient" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--    <div class="content_title">-->
+<!--        <p>Oblicz swój wskaźnik rekrutacyjny!</p>-->
+<!--    </div>-->
+<!--    <div class="content_container">-->
+<!--        <div class="content_centered">-->
+<!--            <form action="/gosc/obliczwskaznik" method="post">-->
+<!--                <div class="select_list_container">-->
+<!--                    <div class="btn-select">-->
+<!--                        <span class="btn-text" th:text="${stopienStudiow}">Stopień studiów</span>-->
+<!--                        <span class="arrow-down">-->
+<!--                            <i class="fas fa-chevron-down"></i>-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                    <ul class="list-items">-->
+<!--                        <li class="item" id="stopienStudiow" name="stopienStudiow"></li>-->
+<!--                        <li class="item" id="stopienStudiow" name="stopienStudiow"></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
+<!--                <input type="hidden" id="stopienStudiow" name="stopienStudiow" th:value="${stopienStudiow}" />-->
+
+<!--                <button type="button_next">Dalej</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

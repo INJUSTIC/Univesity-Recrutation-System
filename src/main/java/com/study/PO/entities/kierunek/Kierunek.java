@@ -4,7 +4,7 @@
 package com.study.PO.entities.kierunek;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.study.PO.entities.kandydat.Kandydat;
+import com.study.PO.entities.kierunek.wskaznik.KryteriumWstepne;
 import com.study.PO.entities.wydzial.Wydzial;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -32,11 +32,11 @@ public class Kierunek {
 
     @Column (name = "Nazwa")
     @NotBlank(message = "Nazwa jest wymagana")
-    @Size(max = 100, message = "Nazwa nie może przekraczać 100 znaków")
+    @Size(max = 128, message = "Nazwa nie może przekraczać 128 znaków")
     private String nazwa;
 
     @Valid
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "opiekun_id")
     private Opiekun opiekun;
 
@@ -84,6 +84,10 @@ public class Kierunek {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "wydzial_id")
     private Wydzial wydzial;
+
+    @OneToMany(mappedBy = "kierunek",
+            cascade = CascadeType.ALL)
+    private List<KryteriumWstepne> kryteria;
 
 //    public Kierunek(String nazwa, Opiekun opiekun, String planStudiow, List<Integer> przeszProgi, int progPunktowy, int prognLiczbaMiejsc, int liczbaOsNaMiejsce, double cenaZaWniosek, List<Integer> liczbaKandydWPoprzLat, int liczbaChetnych, StopienStudiow stopienStudiow, Wydzial wydzial) {
 //        this.nazwa = nazwa;

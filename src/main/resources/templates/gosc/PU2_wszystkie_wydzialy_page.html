@@ -2,15 +2,15 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}">
 <head>
-    <title>Nowy wniosek</title>
+    <title>Wybierz wydzial</title>
 </head>
 <body>
 <div layout:fragment="top_nav_bar" class="top_section">
-    <div layout:insert="~{fragments/top_bar/kandydat}"></div>
+    <div layout:insert="~{fragments/top_bar/gosc}"></div>
 </div>
 
 <div layout:fragment="main_content" class="middle_section">
-    <div layout:insert="~{fragments/main_content/skladanie_wniosku}"></div>
+    <div layout:insert="~{gosc/PU2_lista_wydzialow}"></div>
 </div>
 
 <div layout:fragment="bottom_bar" class="bottom_section">

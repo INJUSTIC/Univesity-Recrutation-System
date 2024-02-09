@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Popup</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #7A5B99; /* Assume background color as per your theme */
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+    .popup-container {
+        position: relative;
+        background-color: #5D3A7A;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+    }
+    p {
+        color: white;
+    }
+    .ok-button {
+        background-color: #8A5FA5;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 15px; /* Add some space above the button */
+    }
+    .ok-button:hover {
+        background-color: #A07AB1;
+    }
+    /* Uncomment below to show the popup */
+    /* #overlay {
+        display: block;
+    }
+    #popup {
+        display: block;
+    } */
+</style>
+<body>
+
+<div id="overlay" class="overlay"></div>
+
+<div id="popup" class="popup-container">
+    <p>Wprowadzona wartość opłaty jest nieprawidłowa. Nie wprowadzono zmian w systemie.</p>
+    <form action="/DzialIT/zarzadzanieOplatamiRekrutacyjnymi" method="get">
+        <button class="ok-button" type="submit">Ok</button>
+    </form>
+</div>
+
+</body>
+</html>
